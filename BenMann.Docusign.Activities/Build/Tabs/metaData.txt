@@ -1,0 +1,27 @@
+//Build - Tabs - Display
+attributeTableBuilder.AddCustomAttributes(typeof(AddDateSignedTab), new DesignerAttribute(typeof(AddDateSignedActivityDesigner)));
+attributeTableBuilder.AddCustomAttributes(typeof(AddEmailAddressTab), new DesignerAttribute(typeof(AddEmailAddressActivityDesigner)));
+attributeTableBuilder.AddCustomAttributes(typeof(AddEnvelopeIDTab), new DesignerAttribute(typeof(AddEnvelopeIDActivityDesigner)));
+attributeTableBuilder.AddCustomAttributes(typeof(AddFirstNameTab), new DesignerAttribute(typeof(AddFirstNameActivityDesigner)));
+attributeTableBuilder.AddCustomAttributes(typeof(AddFullNameTab), new DesignerAttribute(typeof(AddFullNameActivityDesigner)));
+attributeTableBuilder.AddCustomAttributes(typeof(AddLastNameTab), new DesignerAttribute(typeof(AddLastNameActivityDesigner)));
+attributeTableBuilder.AddCustomAttributes(typeof(AddNoteTab), new DesignerAttribute(typeof(AddNoteActivityDesigner)));
+attributeTableBuilder.AddCustomAttributes(typeof(AddTitleTab), new DesignerAttribute(typeof(AddTitleActivityDesigner)));
+//Build - Tabs - GUI
+attributeTableBuilder.AddCustomAttributes(typeof(AddCheckboxTab), new DesignerAttribute(typeof(AddCheckboxActivityDesigner)));
+attributeTableBuilder.AddCustomAttributes(typeof(AddFormulaTabTab), new DesignerAttribute(typeof(AddFormulaActivityDesigner)));
+attributeTableBuilder.AddCustomAttributes(typeof(AddListTab), new DesignerAttribute(typeof(AddListActivityDesigner)));
+attributeTableBuilder.AddCustomAttributes(typeof(AddRadioGroupTab), new DesignerAttribute(typeof(AddRadioGroupActivityDesigner)));
+//Build - Tabs - input
+attributeTableBuilder.AddCustomAttributes(typeof(AddCompanyTab), new DesignerAttribute(typeof(AddCompanyActivityDesigner)));
+attributeTableBuilder.AddCustomAttributes(typeof(AddDateTab), new DesignerAttribute(typeof(AddDateActivityDesigner)));
+attributeTableBuilder.AddCustomAttributes(typeof(AddEmailTab), new DesignerAttribute(typeof(AddEmailActivityDesigner)));
+attributeTableBuilder.AddCustomAttributes(typeof(AddNumberTab), new DesignerAttribute(typeof(AddNumberActivityDesigner)));
+attributeTableBuilder.AddCustomAttributes(typeof(AddSignerAttachmentTab), new DesignerAttribute(typeof(AddSignerAttachmentActivityDesigner)));
+attributeTableBuilder.AddCustomAttributes(typeof(AddSSNTab), new DesignerAttribute(typeof(AddSSNActivityDesigner)));
+attributeTableBuilder.AddCustomAttributes(typeof(AddTextTab), new DesignerAttribute(typeof(AddTextActivityDesigner)));
+attributeTableBuilder.AddCustomAttributes(typeof(AddZipTab), new DesignerAttribute(typeof(AddZipActivityDesigner)));
+attributeTableBuilder.AddCustomAttributes(typeof(AddApproveTab), new DesignerAttribute(typeof(AddApproveActivityDesigner)));
+//Build - Tabs - Signing
+attributeTableBuilder.AddCustomAttributes(typeof(AddDeclineTab), new DesignerAttribute(typeof(AddDeclineActivityDesigner)));
+attributeTableBuilder.AddCustomAttributes(typeof(AddInitialHereTab), new DesignerAttribute(typeof(AddInitialHereActivityDesigner)));

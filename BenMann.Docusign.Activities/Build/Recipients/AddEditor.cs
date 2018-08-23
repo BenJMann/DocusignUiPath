@@ -1,0 +1,19 @@
+﻿using Docusign.Revamped.DocusignTypes;
+using System.Activities;
+using System.ComponentModel;
+
+namespace BenMann.Docusign.Activities.Recipients
+{
+
+    [DisplayName("Add Editor")]
+    public sealed class AddEditor : AddRecipientBase
+    {
+        protected override void Execute(CodeActivityContext context)
+        {
+
+            Initialize(context);
+            Editor editor = new Editor(name, email, routingOrder);
+            AddRecipient(context, editor);
+        }
+    }
+}

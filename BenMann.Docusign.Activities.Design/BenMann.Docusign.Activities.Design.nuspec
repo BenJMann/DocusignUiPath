@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <iconUrl>https://www.docusign.co.uk/sites/default/files/docusign-logo-standard.png</iconUrl>
+    <description>$description$</description>
+    <releaseNotes>Initial Package.</releaseNotes>
+    <copyright>Copyright 2018</copyright>
+    <tags>DocuSign</tags>
+  </metadata>
+</package>

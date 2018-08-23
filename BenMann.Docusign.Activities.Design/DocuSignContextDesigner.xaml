@@ -1,0 +1,41 @@
+﻿<sap:ActivityDesigner x:Class="BenMann.Docusign.Activities.Design.DocuSignContextDesigner"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:s="clr-namespace:System;assembly=mscorlib"
+    xmlns:sa="clr-namespace:System.Activities;assembly=System.Activities"
+    xmlns:sap="clr-namespace:System.Activities.Presentation;assembly=System.Activities.Presentation"
+    xmlns:sapv="clr-namespace:System.Activities.Presentation.View;assembly=System.Activities.Presentation"
+    xmlns:sapc="clr-namespace:System.Activities.Presentation.Converters;assembly=System.Activities.Presentation">
+    
+    <sap:ActivityDesigner.Resources>
+        <ResourceDictionary>
+            <sapc:ArgumentToExpressionConverter x:Key="ArgumentToExpressionConverter" />
+        </ResourceDictionary>
+    </sap:ActivityDesigner.Resources>
+    <sap:ActivityDesigner.Icon>
+        <DrawingBrush>
+            <DrawingBrush.Drawing>
+                <ImageDrawing>
+                    <ImageDrawing.Rect>
+                        <Rect Location="0,0" Size="25,25" ></Rect>
+                    </ImageDrawing.Rect>
+                    <ImageDrawing.ImageSource>
+                        <BitmapImage UriSource="Resources/DocuSignContextIcon.png" />
+                    </ImageDrawing.ImageSource>
+                </ImageDrawing>
+            </DrawingBrush.Drawing>
+        </DrawingBrush>
+    </sap:ActivityDesigner.Icon>
+    <Grid MinWidth="320">
+        <StackPanel>
+            <Border BorderBrush="#ccc" BorderThickness="1" CornerRadius="1" Margin="0 0 0 10">
+                <sap:WorkflowItemPresenter x:Uid="sad:WorkflowItemPresenter_1"  AutomationProperties.AutomationId="Activity" Margin="0,10,0,0"
+                            Item="{Binding Path=ModelItem.AuthBody.Handler, Mode=TwoWay}" AllowedItemType="{x:Type sa:Activity}" HintText="Drop activity here" MinWidth="400" DockPanel.Dock="Bottom" />
+            </Border>
+            <Border BorderBrush="#ccc" BorderThickness="1" CornerRadius="1" Margin="0 0 0 10">
+                <sap:WorkflowItemPresenter x:Uid="sad:WorkflowItemPresenter_1"  AutomationProperties.AutomationId="Activity" Margin="0,10,0,0"
+                            Item="{Binding Path=ModelItem.MainBody.Handler, Mode=TwoWay}" AllowedItemType="{x:Type sa:Activity}" HintText="Drop activity here" MinWidth="400" DockPanel.Dock="Bottom" />
+            </Border>
+        </StackPanel>
+    </Grid>
+</sap:ActivityDesigner>

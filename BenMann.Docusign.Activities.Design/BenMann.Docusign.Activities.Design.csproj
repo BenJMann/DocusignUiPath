@@ -1,0 +1,413 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{69F1D432-BE14-46BE-838C-39277C5894D6}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BenMann.Docusign.Activities.Design</RootNamespace>
+    <AssemblyName>BenMann.Docusign.Activities.Design</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\Output\bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Activities" />
+    <Reference Include="System.Activities.Presentation" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Authentication\AuthenticateActivityDesigner.xaml.cs">
+      <DependentUpon>AuthenticateActivityDesigner.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Authentication\GetAuthorizationUrlActivityDesigner.xaml.cs">
+      <DependentUpon>GetAuthorizationUrlActivityDesigner.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Build\Documents\AttachDocumentActivityDesigner.xaml.cs">
+      <DependentUpon>AttachDocumentActivityDesigner.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Build\Envelopes\CreateEnvelopeActivityDesigner.xaml.cs">
+      <DependentUpon>CreateEnvelopeActivityDesigner.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Build\Envelopes\SendEnvelopeActivityDesigner.xaml.cs">
+      <DependentUpon>SendEnvelopeActivityDesigner.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Build\Recipients\AddAgentActivityDesigner.xaml.cs">
+      <DependentUpon>AddAgentActivityDesigner.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Build\Recipients\AddCarbonCopyActivityDesigner.xaml.cs">
+      <DependentUpon>AddCarbonCopyActivityDesigner.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Build\Recipients\AddCertifiedDeliveryActivityDesigner.xaml.cs">
+      <DependentUpon>AddCertifiedDeliveryActivityDesigner.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Build\Recipients\AddEditorActivityDesigner.xaml.cs">
+      <DependentUpon>AddEditorActivityDesigner.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Build\Recipients\AddIntermediaryActivityDesigner.xaml.cs">
+      <DependentUpon>AddIntermediaryActivityDesigner.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Build\Recipients\AddSignerActivityDesigner.xaml.cs">
+      <DependentUpon>AddSignerActivityDesigner.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Build\Tabs\Display\AddDateSignedActivityDesigner.xaml.cs">
+      <DependentUpon>AddDateSignedActivityDesigner.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Build\Tabs\Display\AddEmailAddressActivityDesigner.xaml.cs">
+      <DependentUpon>AddEmailAddressActivityDesigner.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Build\Tabs\Display\AddEnvelopeIDActivityDesigner.xaml.cs">
+      <DependentUpon>AddEnvelopeIDActivityDesigner.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Build\Tabs\Display\AddFirstNameActivityDesigner.xaml.cs">
+      <DependentUpon>AddFirstNameActivityDesigner.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Build\Tabs\Display\AddFullNameActivityDesigner.xaml.cs">
+      <DependentUpon>AddFullNameActivityDesigner.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Build\Tabs\Display\AddLastNameActivityDesigner.xaml.cs">
+      <DependentUpon>AddLastNameActivityDesigner.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Build\Tabs\Display\AddNoteActivityDesigner.xaml.cs">
+      <DependentUpon>AddNoteActivityDesigner.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Build\Tabs\Display\AddTitleActivityDesigner.xaml.cs">
+      <DependentUpon>AddTitleActivityDesigner.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Build\Tabs\GUI\AddCheckboxActivityDesigner.xaml.cs">
+      <DependentUpon>AddCheckboxActivityDesigner.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Build\Tabs\GUI\AddFormulaActivityDesigner.xaml.cs">
+      <DependentUpon>AddFormulaActivityDesigner.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Build\Tabs\GUI\AddListActivityDesigner.xaml.cs">
+      <DependentUpon>AddListActivityDesigner.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Build\Tabs\GUI\AddRadioGroupActivityDesigner.xaml.cs">
+      <DependentUpon>AddRadioGroupActivityDesigner.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Build\Tabs\Input\AddCompanyActivityDesigner.xaml.cs">
+      <DependentUpon>AddCompanyActivityDesigner.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Build\Tabs\Input\AddDateActivityDesigner.xaml.cs">
+      <DependentUpon>AddDateActivityDesigner.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Build\Tabs\Input\AddEmailActivityDesigner.xaml.cs">
+      <DependentUpon>AddEmailActivityDesigner.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Build\Tabs\Input\AddNumberActivityDesigner.xaml.cs">
+      <DependentUpon>AddNumberActivityDesigner.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Build\Tabs\Input\AddSignerAttachmentActivityDesigner.xaml.cs">
+      <DependentUpon>AddSignerAttachmentActivityDesigner.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Build\Tabs\Input\AddTextActivityDesigner.xaml.cs">
+      <DependentUpon>AddTextActivityDesigner.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Build\Tabs\Input\AddZipActivityDesigner.xaml.cs">
+      <DependentUpon>AddZipActivityDesigner.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Build\Tabs\Input\AddSSNActivityDesigner.xaml.cs">
+      <DependentUpon>AddSSNActivityDesigner.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Build\Tabs\Signing\AddApproveActivityDesigner.xaml.cs">
+      <DependentUpon>AddApproveActivityDesigner.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Build\Tabs\Signing\AddDeclineActivityDesigner.xaml.cs">
+      <DependentUpon>AddDeclineActivityDesigner.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Build\Tabs\Signing\AddInitialHereActivityDesigner.xaml.cs">
+      <DependentUpon>AddInitialHereActivityDesigner.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Build\Tabs\Signing\AddSignHereTabActivityDesigner.xaml.cs">
+      <DependentUpon>AddSignHereTabActivityDesigner.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\AssignTemplateRoleActivityDesigner.xaml.cs">
+      <DependentUpon>AssignTemplateRoleActivityDesigner.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\LoadTemplateActivityDesigner.xaml.cs">
+      <DependentUpon>LoadTemplateActivityDesigner.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\SendTemplateActivityDesigner.xaml.cs">
+      <DependentUpon>SendTemplateActivityDesigner.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="_helper_classes\ComboBoxConverter.cs" />
+    <Compile Include="_helper_classes\DesignerMetadata.cs" />
+    <Compile Include="DocuSignContextDesigner.xaml.cs">
+      <DependentUpon>DocuSignContextDesigner.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PopupDialog.xaml.cs">
+      <DependentUpon>PopupDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Basic\RequestSignatureActivityDesigner.xaml.cs">
+      <DependentUpon>RequestSignatureActivityDesigner.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Authentication\AuthenticateActivityDesigner.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Authentication\GetAuthorizationUrlActivityDesigner.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Build\Documents\AttachDocumentActivityDesigner.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Build\Envelopes\CreateEnvelopeActivityDesigner.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Build\Envelopes\SendEnvelopeActivityDesigner.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Build\Recipients\AddAgentActivityDesigner.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Build\Recipients\AddCarbonCopyActivityDesigner.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Build\Recipients\AddCertifiedDeliveryActivityDesigner.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Build\Recipients\AddEditorActivityDesigner.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Build\Recipients\AddIntermediaryActivityDesigner.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Build\Recipients\AddSignerActivityDesigner.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Build\Tabs\Display\AddDateSignedActivityDesigner.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Build\Tabs\Display\AddEmailAddressActivityDesigner.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Build\Tabs\Display\AddEnvelopeIDActivityDesigner.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Build\Tabs\Display\AddFirstNameActivityDesigner.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Build\Tabs\Display\AddFullNameActivityDesigner.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Build\Tabs\Display\AddLastNameActivityDesigner.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Build\Tabs\Display\AddNoteActivityDesigner.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Build\Tabs\Display\AddTitleActivityDesigner.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Build\Tabs\GUI\AddCheckboxActivityDesigner.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Build\Tabs\GUI\AddFormulaActivityDesigner.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Build\Tabs\GUI\AddListActivityDesigner.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Build\Tabs\GUI\AddRadioGroupActivityDesigner.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Build\Tabs\Input\AddCompanyActivityDesigner.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Build\Tabs\Input\AddDateActivityDesigner.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Build\Tabs\Input\AddEmailActivityDesigner.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Build\Tabs\Input\AddNumberActivityDesigner.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Build\Tabs\Input\AddSignerAttachmentActivityDesigner.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Build\Tabs\Input\AddTextActivityDesigner.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Build\Tabs\Input\AddZipActivityDesigner.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Build\Tabs\Input\AddSSNActivityDesigner.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Build\Tabs\Signing\AddApproveActivityDesigner.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Build\Tabs\Signing\AddDeclineActivityDesigner.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Build\Tabs\Signing\AddInitialHereActivityDesigner.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Build\Tabs\Signing\AddSignHereTabActivityDesigner.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DocuSignContextDesigner.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PopupDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Basic\RequestSignatureActivityDesigner.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Templates\AssignTemplateRoleActivityDesigner.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Templates\LoadTemplateActivityDesigner.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Templates\SendTemplateActivityDesigner.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BenMann.Docusign.Activities\BenMann.Docusign.Activities.csproj">
+      <Project>{00b88191-d7b5-4148-a347-edd7700ea0f9}</Project>
+      <Name>BenMann.Docusign.Activities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BenMann.Docusign\BenMann.Docusign.csproj">
+      <Project>{444f035b-9988-4f5e-a2de-25b171568f13}</Project>
+      <Name>BenMann.Docusign</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="BenMann.Docusign.Activities.Design.nuspec">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\DocuSignContextIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\AddSigner.png" />
+    <Resource Include="Resources\AddSignHereTab.png" />
+    <Resource Include="Resources\AssignTemplateRole.png" />
+    <Resource Include="Resources\AttachDocument.png" />
+    <Resource Include="Resources\Authenticate.png" />
+    <Resource Include="Resources\CreateEnvelope.png" />
+    <Resource Include="Resources\GetAuthorizationUrl.png" />
+    <Resource Include="Resources\LoadTemplate.png" />
+    <Resource Include="Resources\RequestSignature.png" />
+    <Resource Include="Resources\SendEnvelope.png" />
+    <Resource Include="Resources\SendTemplate.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\AgentRecipient.png" />
+    <Resource Include="Resources\ApproveTab.png" />
+    <Resource Include="Resources\CarbonCopyRecipient.png" />
+    <Resource Include="Resources\CertifiedDeliveryRecpt.png" />
+    <Resource Include="Resources\CheckboxTab.png" />
+    <Resource Include="Resources\CompanyTab.png" />
+    <Resource Include="Resources\DateSignedTab.png" />
+    <Resource Include="Resources\DateTab.png" />
+    <Resource Include="Resources\DeclineTab.png" />
+    <Resource Include="Resources\EditorRecipient.png" />
+    <Resource Include="Resources\EmailAddressTab.png" />
+    <Resource Include="Resources\EmailTab.png" />
+    <Resource Include="Resources\EnvelopeIDTab.png" />
+    <Resource Include="Resources\FirstNameTab.png" />
+    <Resource Include="Resources\FormulaTab.png" />
+    <Resource Include="Resources\FullNameTab.png" />
+    <Resource Include="Resources\InitialHereTab.png" />
+    <Resource Include="Resources\IntermediaryRecept.png" />
+    <Resource Include="Resources\LastNameTab.png" />
+    <Resource Include="Resources\ListTab.png" />
+    <Resource Include="Resources\NotesTab.png" />
+    <Resource Include="Resources\NumberTab.png" />
+    <Resource Include="Resources\RadioGroupTab.png" />
+    <Resource Include="Resources\SenderAttachmentTab.png" />
+    <Resource Include="Resources\SSNTab.png" />
+    <Resource Include="Resources\TitleTab.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Text.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\ZipTab.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>if $(ConfigurationName) == Debug "$(SolutionDir).nuget\NuGet.exe" pack "$(ProjectPath)"  -IncludeReferencedProjects -Prop Configuration=$(ConfigurationName)</PostBuildEvent>
+  </PropertyGroup>
+</Project>
