@@ -100,7 +100,6 @@ namespace BenMann.Docusign.Activities
         protected override void EndExecute(NativeActivityContext context, IAsyncResult result)
         {
             AuthenticateAsyncDelegate.EndInvoke(result);
-            authAgent.MessWithAuthToken_AccessToken();
             ScheduleMainActivities(context);
         }
 

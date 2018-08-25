@@ -60,9 +60,12 @@ namespace BenMann.Docusign
 
             httpRequestMessage.RequestUri = new Uri(pUrl + queryString);
 
-            foreach (var head in pHeaders)
+            if (pHeaders != null)
             {
-                httpRequestMessage.Headers.Add(head.Key, head.Value);
+                foreach (var head in pHeaders)
+                {
+                    httpRequestMessage.Headers.Add(head.Key, head.Value);
+                }
             }
             switch (pMethod.Method)
             {

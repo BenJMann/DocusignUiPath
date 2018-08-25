@@ -1,0 +1,14 @@
+{
+  "name": "AuthenticationWorkflows",
+  "description": "Project",
+  "main": "AuthenticationSecure.xaml",
+  "dependencies": {},
+  "excludedData": [
+    "Private:*",
+    "*password*"
+  ],
+  "toolVersion": "18.2",
+  "projectVersion": "1.0.6811.18989",
+  "packOptions": {},
+  "runtimeOptions": {}
+}
