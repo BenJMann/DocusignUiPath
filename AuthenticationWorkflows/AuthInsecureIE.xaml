@@ -13,6 +13,7 @@
     <x:Property Name="authUrl" Type="InArgument(x:String)" />
     <x:Property Name="email" Type="InArgument(x:String)" />
     <x:Property Name="password" Type="InArgument(x:String)" />
+    <x:Property Name="timeout" Type="InArgument(x:Int32)" />
   </x:Members>
   <mva:VisualBasic.Settings>
     <x:Null />
@@ -79,7 +80,7 @@
             </Sequence.Variables>
             <ui:UiElementExists DisplayName="Element Exists 'DIV  AuthCodeSuccess'" Exists="[authExists]" sap2010:WorkflowViewState.IdRef="UiElementExists_1">
               <ui:UiElementExists.Target>
-                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="b626f20a906c7d816303eae31172cbcf" Selector="&lt;webctrl id='AuthCodeSuccess' tag='DIV' /&gt;" TimeoutMS="3000" WaitForReady="INTERACTIVE" />
+                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="b626f20a906c7d816303eae31172cbcf" Selector="&lt;webctrl id='AuthCodeSuccess' tag='DIV' /&gt;" TimeoutMS="[timeout]" WaitForReady="INTERACTIVE" />
               </ui:UiElementExists.Target>
             </ui:UiElementExists>
             <If Condition="[authExists]" sap2010:WorkflowViewState.IdRef="If_1">
@@ -105,7 +106,7 @@
                       <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="f8c710bcbeba8894d0f952ff20fa2259" Selector="&lt;webctrl tag='BUTTON' type='submit' /&gt;" WaitForReady="INTERACTIVE" />
                     </ui:Click.Target>
                   </ui:Click>
-                  <ui:TypeInto DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" Activate="True" ClickBeforeTyping="False" DisplayName="Type into" EmptyField="False" sap2010:WorkflowViewState.IdRef="TypeInto_2" SendWindowMessages="False" SimulateType="False" Text="[password]">
+                  <ui:TypeInto DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" Activate="True" ClickBeforeTyping="False" DisplayName="Type into" EmptyField="True" sap2010:WorkflowViewState.IdRef="TypeInto_2" SendWindowMessages="False" SimulateType="False" Text="[password]">
                     <ui:TypeInto.Target>
                       <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" Selector="&lt;webctrl id='password' tag='INPUT' /&gt;" WaitForReady="INTERACTIVE" />
                     </ui:TypeInto.Target>
@@ -143,7 +144,7 @@
         </ActivityAction>
       </ui:OpenBrowser.Body>
     </ui:OpenBrowser>
-    <sads:DebugSymbol.Symbol>d1lDOlxVc2Vyc1xiZW5tYVxzb3VyY2VccmVwb3NcRG9jdXNpZ24uUmV2YW1wZWRcQXV0aGVudGljYXRpb25Xb3JrZmxvd3NcQXV0aEluc2VjdXJlSUUueGFtbBxFA5MBDgIBAUYFkQEWAgECRrsBRsYBAgEhTAuOARYCAQNQDVQiAgEcVQ2IARICAQWJAQ2NAR0CAQRSiwFSvQECASBSyAFSzgECAR9QXFBqAgEdVRtVKQIBBlcRhgEcAgEIWBNcIQIBGF0Tax4CARZsE3AhAgEScRN/HgIBEIABE4ABWgIBDoEBE4UBKAIBCVqmAVrTAQIBG1iuAli3AgIBGWmmAWnUAQIBF25tbpoBAgEVbJ0CbKkCAgETfaYBfdQBAgERgAEjgAEtAgEPgwGRAYMBwwECAQ2DAc4BgwHVAQIBDIEBYoEBcAIBCg==</sads:DebugSymbol.Symbol>
+    <sads:DebugSymbol.Symbol>d1lDOlxVc2Vyc1xiZW5tYVxzb3VyY2VccmVwb3NcRG9jdXNpZ24uUmV2YW1wZWRcQXV0aGVudGljYXRpb25Xb3JrZmxvd3NcQXV0aEluc2VjdXJlSUUueGFtbBxGA5QBDgIBAUcFkgEWAgECR7sBR8YBAgEiTQuPARYCAQNRDVUiAgEcVg2JARICAQWKAQ2OAR0CAQRTiwFTvQECASFTyAFT0wECAR9RXFFqAgEdVhtWKQIBBlgRhwEcAgEIWRNdIQIBGF4TbB4CARZtE3EhAgESchOAAR4CARCBAROBAVoCAQ6CAROGASgCAQlbpgFb0wECARtZrgJZtwICARlqpgFq1AECARdvbW+aAQIBFW2cAm2oAgIBE36mAX7UAQIBEYEBI4EBLQIBD4QBkQGEAcMBAgENhAHOAYQB1QECAQyCAWKCAXACAQo=</sads:DebugSymbol.Symbol>
   </Sequence>
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>

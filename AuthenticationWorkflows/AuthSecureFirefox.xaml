@@ -14,6 +14,7 @@
     <x:Property Name="authUrl" Type="InArgument(x:String)" />
     <x:Property Name="email" Type="InArgument(x:String)" />
     <x:Property Name="password" Type="InArgument(ss:SecureString)" />
+    <x:Property Name="timeout" Type="InArgument(x:Int32)" />
   </x:Members>
   <mva:VisualBasic.Settings>
     <x:Null />
@@ -62,6 +63,8 @@
       <AssemblyReference>WindowsBase</AssemblyReference>
       <AssemblyReference>PresentationCore</AssemblyReference>
       <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
   <Sequence DisplayName="Authentication" sap2010:WorkflowViewState.IdRef="Sequence_3">
@@ -77,7 +80,7 @@
             </Sequence.Variables>
             <ui:UiElementExists DisplayName="Element Exists 'DIV  AuthCodeSuccess'" Exists="[authExists]" sap2010:WorkflowViewState.IdRef="UiElementExists_1">
               <ui:UiElementExists.Target>
-                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="b626f20a906c7d816303eae31172cbcf" Selector="&lt;webctrl id='AuthCodeSuccess' tag='DIV' /&gt;" TimeoutMS="3000" WaitForReady="INTERACTIVE" />
+                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="b626f20a906c7d816303eae31172cbcf" Selector="&lt;webctrl id='AuthCodeSuccess' tag='DIV' /&gt;" TimeoutMS="[timeout]" WaitForReady="INTERACTIVE" />
               </ui:UiElementExists.Target>
             </ui:UiElementExists>
             <If Condition="[authExists]" sap2010:WorkflowViewState.IdRef="If_1">
@@ -141,7 +144,7 @@
         </ActivityAction>
       </ui:OpenBrowser.Body>
     </ui:OpenBrowser>
-    <sads:DebugSymbol.Symbol>d1xDOlxVc2Vyc1xiZW5tYVxzb3VyY2VccmVwb3NcRG9jdXNpZ24uUmV2YW1wZWRcQXV0aGVudGljYXRpb25Xb3JrZmxvd3NcQXV0aFNlY3VyZUZpcmVmb3gueGFtbBxDA5EBDgIBAUQFjwEWAgECRMABRMsBAgEhSguMARYCAQNODVIiAgEcUw2GARICAQWHAQ2LAR0CAQRQiwFQvQECASBQyAFQzgECAR9OXE5qAgEdUxtTKQIBBlURhAEcAgEIVhNaIQIBGFsTaR4CARZqE24nAgESbxN9HgIBEH4TfloCAQ5/E4MBKAIBCVimAVjTAQIBG1auAla3AgIBGWemAWfUAQIBF2xtbJoBAgEVaoUCapECAgETe6YBe9QBAgERfiN+LQIBD4EBkQGBAcMBAgENgQHOAYEB1QECAQx/Yn9wAgEK</sads:DebugSymbol.Symbol>
+    <sads:DebugSymbol.Symbol>d1xDOlxVc2Vyc1xiZW5tYVxzb3VyY2VccmVwb3NcRG9jdXNpZ24uUmV2YW1wZWRcQXV0aGVudGljYXRpb25Xb3JrZmxvd3NcQXV0aFNlY3VyZUZpcmVmb3gueGFtbBxGA5QBDgIBAUcFkgEWAgECR8ABR8sBAgEiTQuPARYCAQNRDVUiAgEcVg2JARICAQWKAQ2OAR0CAQRTiwFTvQECASFTyAFT0wECAR9RXFFqAgEdVhtWKQIBBlgRhwEcAgEIWRNdIQIBGF4TbB4CARZtE3EnAgESchOAAR4CARCBAROBAVoCAQ6CAROGASgCAQlbpgFb0wECARtZrgJZtwICARlqpgFq1AECARdvbW+aAQIBFW2FAm2RAgIBE36mAX7UAQIBEYEBI4EBLQIBD4QBkQGEAcMBAgENhAHOAYQB1QECAQyCAWKCAXACAQo=</sads:DebugSymbol.Symbol>
   </Sequence>
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>

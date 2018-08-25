@@ -157,6 +157,8 @@ namespace BenMann.Docusign.Activities.Authentication
                 return;
             }
 
+            Console.Write(filename);
+
             //Try/catch
             Directory.CreateDirectory(AuthDirectoryName);
             filepath = Path.Combine(AuthDirectoryName, filename);
