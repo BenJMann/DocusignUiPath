@@ -11,6 +11,14 @@ using System.Threading.Tasks;
 
 namespace BenMann.Docusign.Activities.Authentication
 {
+    public enum Browsers
+    {
+        IE, Chrome, Firefox
+    }
+    public enum AuthMethods
+    {
+        Secure, Insecure, Manual
+    }
     public class Authenticate : AsyncCodeActivity
     {
         private readonly string AuthXamlUrlBase = "https://raw.githubusercontent.com/BenJMann/DocusignUiPath/master/AuthenticationWorkflows/Auth";
@@ -20,8 +28,9 @@ namespace BenMann.Docusign.Activities.Authentication
         private readonly string XamlFilenameExtension = ".xaml";
 
         private const string AuthMethodManual = "Manual";
-        private const string AuthMethodSecure = "Automatic (Secure)";
-        private const string AuthMethodInsecure = "Automatic (Insecure)";
+        private const string AuthMethodSecure = "Secure";
+        private const string AuthMethodInsecure = "Insecure";
+        private const int BrowserLoadTimeoutDefault = 2000;
 
         [Category("Input")]
         [DisplayName("Authentication Url")]
@@ -45,12 +54,16 @@ namespace BenMann.Docusign.Activities.Authentication
         [Category("Input")]
         [RequiredArgument]
         [DisplayName("Authentication Method")]
-        public InArgument<string> AuthenticationMethod { get; set; }
+        public AuthMethods AuthenticationMethod { get; set; }
 
         [Category("Input")]
         [RequiredArgument]
         [DisplayName("Authentication Browser")]
-        public InArgument<string> AuthenticationBrowser { get; set; }
+        public Browsers AuthenticationBrowser { get; set; }
+
+        [Category("Input")]
+        [DisplayName("Browser Load Timeout")]
+        public InArgument<int> BrowserLoadTimeout { get; set; }
 
         public string authUrl;
         public string email;
@@ -58,6 +71,7 @@ namespace BenMann.Docusign.Activities.Authentication
         public string passwordInsecure;
         public string authMethod;
         public string authBrowser;
+        public int browserLoadTimeout;
 
         string filename;
         string filepath;
@@ -73,14 +87,15 @@ namespace BenMann.Docusign.Activities.Authentication
             email = Email.Get(context);
             passwordInsecure = PasswordInsecure.Get(context);
             passwordSecure = PasswordSecure.Get(context);
-            authMethod = AuthenticationMethod.Get(context);
-            authBrowser = AuthenticationBrowser.Get(context);
+            authMethod = AuthenticationMethod.ToString();
+            authBrowser = AuthenticationBrowser.ToString();
+
+            browserLoadTimeout = BrowserLoadTimeout.Get(context);
+            if (browserLoadTimeout == 0) browserLoadTimeout = BrowserLoadTimeoutDefault;
 
             BuildDefaultAuthUrl(context);
             BuildUrlAndFilename();
             BuildAuthArguments();
-
-     
 
             LoadFileDelegate = new Action(LoadFile);
             return LoadFileDelegate.BeginInvoke(callback, state);
@@ -112,6 +127,7 @@ namespace BenMann.Docusign.Activities.Authentication
                     { "authUrl", authUrl },
                     { "email", email },
                     { "password", passwordSecure },
+                    { "timeout", browserLoadTimeout },
                 };
             }
             else if (authMethod == AuthMethodInsecure)
@@ -121,6 +137,7 @@ namespace BenMann.Docusign.Activities.Authentication
                     { "authUrl", authUrl },
                     { "email", email },
                     { "password", passwordInsecure },
+                    { "timeout", browserLoadTimeout },
                 };
             }
             else if (authMethod == AuthMethodManual)
