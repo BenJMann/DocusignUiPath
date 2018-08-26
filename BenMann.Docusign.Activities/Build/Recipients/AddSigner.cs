@@ -1,8 +1,8 @@
-﻿using Docusign.Revamped.DocusignTypes;
+﻿using Docusign.DocusignTypes;
 using System.Activities;
 using System.ComponentModel;
 
-namespace BenMann.Docusign.Activities.Recipients
+namespace Docusign.Recipients
 {
 
     [DisplayName("Add Signer")]

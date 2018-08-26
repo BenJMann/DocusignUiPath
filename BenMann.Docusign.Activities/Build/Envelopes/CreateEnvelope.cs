@@ -1,18 +1,19 @@
-﻿using BenMann.Docusign.DocusignTypes;
+﻿using Docusign.DocusignTypes;
 using System.Activities;
 using System.ComponentModel;
 
-namespace BenMann.Docusign.Activities.Envelopes
+namespace Docusign.Envelopes
 {
 
     public sealed class CreateEnvelope : CodeActivity
     {
         [Category("Input")]
         [RequiredArgument]
+        [DisplayName("Subject Line")]
         public InArgument<string> Subject { get; set; }
 
         [Category("Output")]
-        public OutArgument<object> Envelope { get; set; }
+        public OutArgument<Envelope> Envelope { get; set; }
 
         protected override void Execute(CodeActivityContext context)
         {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Docusign.Revamped.DocusignTypes
+namespace Docusign.DocusignTypes
 {
     public class Tabs
     {
@@ -169,7 +169,12 @@ namespace Docusign.Revamped.DocusignTypes
                 ssnTabs.Add((SSNTab)tab);
             }
 
-            else if (tab.GetType() == typeof(TextTab))
+            else if (tab.GetType() == typeof(TextDisplayTab))
+            {
+                if (textTabs == null) textTabs = new List<TextTab>();
+                textTabs.Add((TextTab)tab);
+            }
+            else if (tab.GetType() == typeof(TextInputTab))
             {
                 if (textTabs == null) textTabs = new List<TextTab>();
                 textTabs.Add((TextTab)tab);
@@ -285,6 +290,10 @@ namespace Docusign.Revamped.DocusignTypes
             this.fontColor = fontColor;
             this.fontSize = fontSize;
         }
+        public bool ShouldSerializefontSize()
+        {
+            return fontSize != 0;
+        }
     }
     public class DisplayItemTab : ConstDisplayTab
     {
@@ -360,15 +369,19 @@ namespace Docusign.Revamped.DocusignTypes
     public class SignHereTab : Tab
     {
         public int scaleValue;
+        public bool optional;
 
-        public SignHereTab(int xPos, int yPos, int docId, int pageNumber, string toolTip, string tabLabel, int scaleValue) : base(xPos, yPos, docId, pageNumber, toolTip, tabLabel)
+        public SignHereTab(int xPos, int yPos, int docId, int pageNumber, string toolTip, string tabLabel, int scaleValue, bool optional) : base(xPos, yPos, docId, pageNumber, toolTip, tabLabel)
         {
             this.scaleValue = scaleValue;
+            this.optional = optional;
         }
 
-        public SignHereTab(string anchorString, int anchorXOffset, int anchorYOffset, int docId, int pageNumber, string toolTip, string tabLabel, int scaleValue) : base(anchorString, anchorXOffset, anchorYOffset, docId, pageNumber, toolTip, tabLabel)
+        public SignHereTab(string anchorString, int anchorXOffset, int anchorYOffset, int docId, int pageNumber, string toolTip, string tabLabel, int scaleValue, bool optional) : base(anchorString, anchorXOffset, anchorYOffset, docId, pageNumber, toolTip, tabLabel)
         {
             this.scaleValue = scaleValue;
+            this.optional = optional;
+
         }
         public bool ShouldSerializescaleValue()
         {
@@ -378,15 +391,19 @@ namespace Docusign.Revamped.DocusignTypes
     public class InitialHereTab : Tab
     {
         public int scaleValue;
+        public bool optional;
 
-        public InitialHereTab(int xPos, int yPos, int docId, int pageNumber, string toolTip, string tabLabel, int scaleValue) : base(xPos, yPos, docId, pageNumber, toolTip, tabLabel)
+
+        public InitialHereTab(int xPos, int yPos, int docId, int pageNumber, string toolTip, string tabLabel, int scaleValue, bool optional) : base(xPos, yPos, docId, pageNumber, toolTip, tabLabel)
         {
             this.scaleValue = scaleValue;
+            this.optional = optional;
         }
 
-        public InitialHereTab(string anchorString, int anchorXOffset, int anchorYOffset, int docId, int pageNumber, string toolTip, string tabLabel, int scaleValue) : base(anchorString, anchorXOffset, anchorYOffset, docId, pageNumber, toolTip, tabLabel)
+        public InitialHereTab(string anchorString, int anchorXOffset, int anchorYOffset, int docId, int pageNumber, string toolTip, string tabLabel, int scaleValue, bool optional) : base(anchorString, anchorXOffset, anchorYOffset, docId, pageNumber, toolTip, tabLabel)
         {
             this.scaleValue = scaleValue;
+            this.optional = optional;
         }
         public bool ShouldSerializescaleValue()
         {
@@ -418,15 +435,18 @@ namespace Docusign.Revamped.DocusignTypes
     public class SignerAttachmentTab : Tab
     {
         public int scaleValue;
+        public bool optional;
 
-        public SignerAttachmentTab(int xPos, int yPos, int docId, int pageNumber, string toolTip, string tabLabel, int scaleValue) : base(xPos, yPos, docId, pageNumber, toolTip, tabLabel)
+        public SignerAttachmentTab(int xPos, int yPos, int docId, int pageNumber, string toolTip, string tabLabel, int scaleValue, bool optional) : base(xPos, yPos, docId, pageNumber, toolTip, tabLabel)
         {
             this.scaleValue = scaleValue;
+            this.optional = optional;
         }
 
-        public SignerAttachmentTab(string anchorString, int anchorXOffset, int anchorYOffset, int docId, int pageNumber, string toolTip, string tabLabel, int scaleValue) : base(anchorString, anchorXOffset, anchorYOffset, docId, pageNumber, toolTip, tabLabel)
+        public SignerAttachmentTab(string anchorString, int anchorXOffset, int anchorYOffset, int docId, int pageNumber, string toolTip, string tabLabel, int scaleValue, bool optional) : base(anchorString, anchorXOffset, anchorYOffset, docId, pageNumber, toolTip, tabLabel)
         {
             this.scaleValue = scaleValue;
+            this.optional = optional;
         }
         public bool ShouldSerializescaleValue()
         {
@@ -437,39 +457,51 @@ namespace Docusign.Revamped.DocusignTypes
     //GUI Tabs
     public class CheckboxTab : Tab
     {
-        public CheckboxTab(int xPos, int yPos, int docId, int pageNumber, string toolTip, string tabLabel) : base(xPos, yPos, docId, pageNumber, toolTip, tabLabel)
+        public bool shared;
+        public CheckboxTab(int xPos, int yPos, int docId, int pageNumber, string toolTip, string tabLabel, bool shared) : base(xPos, yPos, docId, pageNumber, toolTip, tabLabel)
         {
+            this.shared = shared;
         }
 
-        public CheckboxTab(string anchorString, int anchorXOffset, int anchorYOffset, int docId, int pageNumber, string toolTip, string tabLabel) : base(anchorString, anchorXOffset, anchorYOffset, docId, pageNumber, toolTip, tabLabel)
+        public CheckboxTab(string anchorString, int anchorXOffset, int anchorYOffset, int docId, int pageNumber, string toolTip, string tabLabel, bool shared) : base(anchorString, anchorXOffset, anchorYOffset, docId, pageNumber, toolTip, tabLabel)
         {
+            this.shared = shared;
         }
     }
     public class FormulaTab : DisplayItemTab
     {
+        public bool shared;
         public string formula;
-        public FormulaTab(int xPos, int yPos, int docId, int pageNumber, string toolTip, string tabLabel, bool bold, bool italic, bool underline, string font, string fontColor, int fontSize, int width, string value, string formula) : base(xPos, yPos, docId, pageNumber, toolTip, tabLabel, bold, italic, underline, font, fontColor, fontSize, width, value)
+        public FormulaTab(int xPos, int yPos, int docId, int pageNumber, string toolTip, string tabLabel, bool bold, bool italic, bool underline, string font, string fontColor, int fontSize, int width, string value, string formula, bool shared) : base(xPos, yPos, docId, pageNumber, toolTip, tabLabel, bold, italic, underline, font, fontColor, fontSize, width, value)
         {
+            this.shared = shared;
             this.formula = formula;
         }
 
-        public FormulaTab(string anchorString, int anchorXOffset, int anchorYOffset, int docId, int pageNumber, string toolTip, string tabLabel, bool bold, bool italic, bool underline, string font, string fontColor, int fontSize, int width, string value, string formula) : base(anchorString, anchorXOffset, anchorYOffset, docId, pageNumber, toolTip, tabLabel, bold, italic, underline, font, fontColor, fontSize, width, value)
+        public FormulaTab(string anchorString, int anchorXOffset, int anchorYOffset, int docId, int pageNumber, string toolTip, string tabLabel, bool bold, bool italic, bool underline, string font, string fontColor, int fontSize, int width, string value, string formula, bool shared) : base(anchorString, anchorXOffset, anchorYOffset, docId, pageNumber, toolTip, tabLabel, bold, italic, underline, font, fontColor, fontSize, width, value)
         {
+            this.shared = shared;
             this.formula = formula;
         }
     }
     public class ListTab : ConstDisplayTab
     {
+        public bool shared;
         public List<ListItem> listItems;
+        public bool required;
 
-        public ListTab(int xPos, int yPos, int docId, int pageNumber, string toolTip, string tabLabel, bool bold, bool italic, bool underline, string font, string fontColor, int fontSize, string listItems) : base(xPos, yPos, docId, pageNumber, toolTip, tabLabel, bold, italic, underline, font, fontColor, fontSize)
+        public ListTab(int xPos, int yPos, int docId, int pageNumber, string toolTip, string tabLabel, bool bold, bool italic, bool underline, string font, string fontColor, int fontSize, string listItems, bool required, bool shared) : base(xPos, yPos, docId, pageNumber, toolTip, tabLabel, bold, italic, underline, font, fontColor, fontSize)
         {
+            this.shared = shared;
             CreateList(listItems);
+            this.required = required;
         }
 
-        public ListTab(string anchorString, int anchorXOffset, int anchorYOffset, int docId, int pageNumber, string toolTip, string tabLabel, bool bold, bool italic, bool underline, string font, string fontColor, int fontSize, string listItems) : base(anchorString, anchorXOffset, anchorYOffset, docId, pageNumber, toolTip, tabLabel, bold, italic, underline, font, fontColor, fontSize)
+        public ListTab(string anchorString, int anchorXOffset, int anchorYOffset, int docId, int pageNumber, string toolTip, string tabLabel, bool bold, bool italic, bool underline, string font, string fontColor, int fontSize, string listItems, bool required, bool shared) : base(anchorString, anchorXOffset, anchorYOffset, docId, pageNumber, toolTip, tabLabel, bold, italic, underline, font, fontColor, fontSize)
         {
+            this.shared = shared;
             CreateList(listItems);
+            this.required = required;
         }
         public void CreateList(string listItems)
         {
@@ -495,44 +527,53 @@ namespace Docusign.Revamped.DocusignTypes
     }
     public class RadioGroupTab : Tab
     {
+        public bool shared;
         public List<Radio> radios;
 
-        public RadioGroupTab(int xPos, int yPos, int docId, int pageNumber, string toolTip, string tabLabel, int spacing, int radioItemCount) : base(xPos, yPos, docId, pageNumber, toolTip, tabLabel)
+        public RadioGroupTab(int xPos, int yPos, int docId, int pageNumber, string toolTip, string tabLabel, int spacing, int radioItemCount, bool required, bool shared) : base(xPos, yPos, docId, pageNumber, toolTip, tabLabel)
         {
+            this.shared = shared;
             if (radios == null) radios = new List<Radio>();
             if (pageNumber == 0) pageNumber = 1;
-            for (var i = 0; i< radioItemCount; i++)
-                this.radios.Add(new Radio(xPos, yPos + spacing * i, docId, pageNumber));
+            for (var i = 0; i < radioItemCount; i++)
+                this.radios.Add(new Radio(xPos, yPos + spacing * i, docId, pageNumber, required));
         }
 
-        public RadioGroupTab(string anchorString, int anchorXOffset, int anchorYOffset, int docId, int pageNumber, string toolTip, string tabLabel, int spacing, int radioItemCount) : base(anchorString, anchorXOffset, anchorYOffset, docId, pageNumber, toolTip, tabLabel)
+        public RadioGroupTab(string anchorString, int anchorXOffset, int anchorYOffset, int docId, int pageNumber, string toolTip, string tabLabel, int spacing, int radioItemCount, bool required, bool shared) : base(anchorString, anchorXOffset, anchorYOffset, docId, pageNumber, toolTip, tabLabel)
         {
+            this.shared = shared;
             if (radios == null) radios = new List<Radio>();
             if (pageNumber == 0) pageNumber = 1;
-            for (var i = 0; i< radioItemCount; i++)
-                this.radios.Add(new Radio(anchorString, anchorXOffset, anchorYOffset + spacing * i, docId, pageNumber));
+            for (var i = 0; i < radioItemCount; i++)
+                this.radios.Add(new Radio(anchorString, anchorXOffset, anchorYOffset + spacing * i, docId, pageNumber, required));
         }
     }
     public class Radio : Tab
     {
-        public Radio(int xPos, int yPos, int docId, int pageNumber) : base(xPos, yPos, docId, pageNumber, null, null)
+        public bool required;
+        public Radio(int xPos, int yPos, int docId, int pageNumber, bool required) : base(xPos, yPos, docId, pageNumber, null, null)
         {
+            this.required = required;
         }
 
-        public Radio(string anchorString, int anchorXOffset, int anchorYOffset, int docId, int pageNumber) : base(anchorString, anchorXOffset, anchorYOffset, docId, pageNumber, null, null)
+        public Radio(string anchorString, int anchorXOffset, int anchorYOffset, int docId, int pageNumber, bool required) : base(anchorString, anchorXOffset, anchorYOffset, docId, pageNumber, null, null)
         {
+            this.required = required;
         }
     }
 
     //DisplayItem Tabs
     public class CompanyTab : DisplayItemTab
     {
-        public CompanyTab(int xPos, int yPos, int docId, int pageNumber, string toolTip, string tabLabel, bool bold, bool italic, bool underline, string font, string fontColor, int fontSize, int width, string value) : base(xPos, yPos, docId, pageNumber, toolTip, tabLabel, bold, italic, underline, font, fontColor, fontSize, width, value)
+        public bool required;
+        public CompanyTab(int xPos, int yPos, int docId, int pageNumber, string toolTip, string tabLabel, bool bold, bool italic, bool underline, string font, string fontColor, int fontSize, int width, string value, bool required) : base(xPos, yPos, docId, pageNumber, toolTip, tabLabel, bold, italic, underline, font, fontColor, fontSize, width, value)
         {
+            this.required = required;
         }
 
-        public CompanyTab(string anchorString, int anchorXOffset, int anchorYOffset, int docId, int pageNumber, string toolTip, string tabLabel, bool bold, bool italic, bool underline, string font, string fontColor, int fontSize, int width, string value) : base(anchorString, anchorXOffset, anchorYOffset, docId, pageNumber, toolTip, tabLabel, bold, italic, underline, font, fontColor, fontSize, width, value)
+        public CompanyTab(string anchorString, int anchorXOffset, int anchorYOffset, int docId, int pageNumber, string toolTip, string tabLabel, bool bold, bool italic, bool underline, string font, string fontColor, int fontSize, int width, string value, bool required) : base(anchorString, anchorXOffset, anchorYOffset, docId, pageNumber, toolTip, tabLabel, bold, italic, underline, font, fontColor, fontSize, width, value)
         {
+            this.required = required;
         }
     }
     public class DateSignedTab : DisplayItemTab
@@ -547,63 +588,100 @@ namespace Docusign.Revamped.DocusignTypes
     }
     public class DateTab : DisplayItemTab
     {
-        public DateTab(int xPos, int yPos, int docId, int pageNumber, string toolTip, string tabLabel, bool bold, bool italic, bool underline, string font, string fontColor, int fontSize, int width, string value) : base(xPos, yPos, docId, pageNumber, toolTip, tabLabel, bold, italic, underline, font, fontColor, fontSize, width, value)
+        public bool shared;
+        public string locked = "false";
+        public bool required;
+        public DateTab(int xPos, int yPos, int docId, int pageNumber, string toolTip, string tabLabel, bool bold, bool italic, bool underline, string font, string fontColor, int fontSize, int width, string value, bool required, bool shared) : base(xPos, yPos, docId, pageNumber, toolTip, tabLabel, bold, italic, underline, font, fontColor, fontSize, width, value)
         {
+            this.shared = shared;
+            this.required = required;
         }
 
-        public DateTab(string anchorString, int anchorXOffset, int anchorYOffset, int docId, int pageNumber, string toolTip, string tabLabel, bool bold, bool italic, bool underline, string font, string fontColor, int fontSize, int width, string value) : base(anchorString, anchorXOffset, anchorYOffset, docId, pageNumber, toolTip, tabLabel, bold, italic, underline, font, fontColor, fontSize, width, value)
+        public DateTab(string anchorString, int anchorXOffset, int anchorYOffset, int docId, int pageNumber, string toolTip, string tabLabel, bool bold, bool italic, bool underline, string font, string fontColor, int fontSize, int width, string value, bool required, bool shared) : base(anchorString, anchorXOffset, anchorYOffset, docId, pageNumber, toolTip, tabLabel, bold, italic, underline, font, fontColor, fontSize, width, value)
         {
+            this.shared = shared;
+            this.required = required;
         }
     }
     public class EmailTab : DisplayItemTab
     {
-        public EmailTab(int xPos, int yPos, int docId, int pageNumber, string toolTip, string tabLabel, bool bold, bool italic, bool underline, string font, string fontColor, int fontSize, int width, string value) : base(xPos, yPos, docId, pageNumber, toolTip, tabLabel, bold, italic, underline, font, fontColor, fontSize, width, value)
+        public bool shared;
+        public string locked = "false";
+        public bool required;
+        public EmailTab(int xPos, int yPos, int docId, int pageNumber, string toolTip, string tabLabel, bool bold, bool italic, bool underline, string font, string fontColor, int fontSize, int width, string value, bool required, bool shared) : base(xPos, yPos, docId, pageNumber, toolTip, tabLabel, bold, italic, underline, font, fontColor, fontSize, width, value)
         {
+            this.shared = shared;
+            this.required = required;
         }
 
-        public EmailTab(string anchorString, int anchorXOffset, int anchorYOffset, int docId, int pageNumber, string toolTip, string tabLabel, bool bold, bool italic, bool underline, string font, string fontColor, int fontSize, int width, string value) : base(anchorString, anchorXOffset, anchorYOffset, docId, pageNumber, toolTip, tabLabel, bold, italic, underline, font, fontColor, fontSize, width, value)
+        public EmailTab(string anchorString, int anchorXOffset, int anchorYOffset, int docId, int pageNumber, string toolTip, string tabLabel, bool bold, bool italic, bool underline, string font, string fontColor, int fontSize, int width, string value, bool required, bool shared) : base(anchorString, anchorXOffset, anchorYOffset, docId, pageNumber, toolTip, tabLabel, bold, italic, underline, font, fontColor, fontSize, width, value)
         {
+            this.shared = shared;
+            this.required = required;
         }
     }
     public class NumberTab : DisplayItemTab
     {
+        public bool shared;
         public string locked = "false";
-        public NumberTab(int xPos, int yPos, int docId, int pageNumber, string toolTip, string tabLabel, bool bold, bool italic, bool underline, string font, string fontColor, int fontSize, int width, float value) : base(xPos, yPos, docId, pageNumber, toolTip, tabLabel, bold, italic, underline, font, fontColor, fontSize, width, value)
+        public bool required;
+        public NumberTab(int xPos, int yPos, int docId, int pageNumber, string toolTip, string tabLabel, bool bold, bool italic, bool underline, string font, string fontColor, int fontSize, int width, float value, bool required, bool shared) : base(xPos, yPos, docId, pageNumber, toolTip, tabLabel, bold, italic, underline, font, fontColor, fontSize, width, value)
         {
+            this.shared = shared;
+            this.required = required;
         }
 
-        public NumberTab(string anchorString, int anchorXOffset, int anchorYOffset, int docId, int pageNumber, string toolTip, string tabLabel, bool bold, bool italic, bool underline, string font, string fontColor, int fontSize, int width, float value) : base(anchorString, anchorXOffset, anchorYOffset, docId, pageNumber, toolTip, tabLabel, bold, italic, underline, font, fontColor, fontSize, width, value)
+        public NumberTab(string anchorString, int anchorXOffset, int anchorYOffset, int docId, int pageNumber, string toolTip, string tabLabel, bool bold, bool italic, bool underline, string font, string fontColor, int fontSize, int width, float value, bool required, bool shared) : base(anchorString, anchorXOffset, anchorYOffset, docId, pageNumber, toolTip, tabLabel, bold, italic, underline, font, fontColor, fontSize, width, value)
         {
+            this.shared = shared;
+            this.required = required;
         }
     }
     public class SSNTab : DisplayItemTab
     {
-        public SSNTab(int xPos, int yPos, int docId, int pageNumber, string toolTip, string tabLabel, bool bold, bool italic, bool underline, string font, string fontColor, int fontSize, int width, string value) : base(xPos, yPos, docId, pageNumber, toolTip, tabLabel, bold, italic, underline, font, fontColor, fontSize, width, value)
+        public bool shared;
+        public string locked = "false";
+        public bool required;
+        public SSNTab(int xPos, int yPos, int docId, int pageNumber, string toolTip, string tabLabel, bool bold, bool italic, bool underline, string font, string fontColor, int fontSize, int width, string value, bool required, bool shared) : base(xPos, yPos, docId, pageNumber, toolTip, tabLabel, bold, italic, underline, font, fontColor, fontSize, width, value)
         {
+            this.shared = shared;
+            this.required = required;
         }
 
-        public SSNTab(string anchorString, int anchorXOffset, int anchorYOffset, int docId, int pageNumber, string toolTip, string tabLabel, bool bold, bool italic, bool underline, string font, string fontColor, int fontSize, int width, string value) : base(anchorString, anchorXOffset, anchorYOffset, docId, pageNumber, toolTip, tabLabel, bold, italic, underline, font, fontColor, fontSize, width, value)
+        public SSNTab(string anchorString, int anchorXOffset, int anchorYOffset, int docId, int pageNumber, string toolTip, string tabLabel, bool bold, bool italic, bool underline, string font, string fontColor, int fontSize, int width, string value, bool required, bool shared) : base(anchorString, anchorXOffset, anchorYOffset, docId, pageNumber, toolTip, tabLabel, bold, italic, underline, font, fontColor, fontSize, width, value)
         {
+            this.shared = shared;
+            this.required = required;
         }
     }
     public class TitleTab : DisplayItemTab
     {
-        public TitleTab(int xPos, int yPos, int docId, int pageNumber, string toolTip, string tabLabel, bool bold, bool italic, bool underline, string font, string fontColor, int fontSize, int width, string value) : base(xPos, yPos, docId, pageNumber, toolTip, tabLabel, bold, italic, underline, font, fontColor, fontSize, width, value)
+        public bool required;
+        public TitleTab(int xPos, int yPos, int docId, int pageNumber, string toolTip, string tabLabel, bool bold, bool italic, bool underline, string font, string fontColor, int fontSize, int width, string value, bool required) : base(xPos, yPos, docId, pageNumber, toolTip, tabLabel, bold, italic, underline, font, fontColor, fontSize, width, value)
         {
+            this.required = required;
         }
 
-        public TitleTab(string anchorString, int anchorXOffset, int anchorYOffset, int docId, int pageNumber, string toolTip, string tabLabel, bool bold, bool italic, bool underline, string font, string fontColor, int fontSize, int width, string value) : base(anchorString, anchorXOffset, anchorYOffset, docId, pageNumber, toolTip, tabLabel, bold, italic, underline, font, fontColor, fontSize, width, value)
+        public TitleTab(string anchorString, int anchorXOffset, int anchorYOffset, int docId, int pageNumber, string toolTip, string tabLabel, bool bold, bool italic, bool underline, string font, string fontColor, int fontSize, int width, string value, bool required) : base(anchorString, anchorXOffset, anchorYOffset, docId, pageNumber, toolTip, tabLabel, bold, italic, underline, font, fontColor, fontSize, width, value)
         {
+            this.required = required;
         }
     }
     public class ZipTab : DisplayItemTab
     {
-        public ZipTab(int xPos, int yPos, int docId, int pageNumber, string toolTip, string tabLabel, bool bold, bool italic, bool underline, string font, string fontColor, int fontSize, int width, string value) : base(xPos, yPos, docId, pageNumber, toolTip, tabLabel, bold, italic, underline, font, fontColor, fontSize, width, value)
+        public bool shared;
+        public string locked = "false";
+        public bool required;
+        public ZipTab(int xPos, int yPos, int docId, int pageNumber, string toolTip, string tabLabel, bool bold, bool italic, bool underline, string font, string fontColor, int fontSize, int width, string value, bool required, bool shared) : base(xPos, yPos, docId, pageNumber, toolTip, tabLabel, bold, italic, underline, font, fontColor, fontSize, width, value)
         {
+            this.shared = shared;
+            this.required = required;
         }
 
-        public ZipTab(string anchorString, int anchorXOffset, int anchorYOffset, int docId, int pageNumber, string toolTip, string tabLabel, bool bold, bool italic, bool underline, string font, string fontColor, int fontSize, int width, string value) : base(anchorString, anchorXOffset, anchorYOffset, docId, pageNumber, toolTip, tabLabel, bold, italic, underline, font, fontColor, fontSize, width, value)
+        public ZipTab(string anchorString, int anchorXOffset, int anchorYOffset, int docId, int pageNumber, string toolTip, string tabLabel, bool bold, bool italic, bool underline, string font, string fontColor, int fontSize, int width, string value, bool required, bool shared) : base(anchorString, anchorXOffset, anchorYOffset, docId, pageNumber, toolTip, tabLabel, bold, italic, underline, font, fontColor, fontSize, width, value)
         {
+            this.shared = shared;
+            this.required = required;
         }
     }
 
@@ -676,12 +754,42 @@ namespace Docusign.Revamped.DocusignTypes
     }
     public class TextTab : BigDisplayItemTab
     {
-        public TextTab(int xPos, int yPos, int docId, int pageNumber, string toolTip, string tabLabel, bool bold, bool italic, bool underline, string font, string fontColor, int fontSize, int width, string value, int height) : base(xPos, yPos, docId, pageNumber, toolTip, tabLabel, bold, italic, underline, font, fontColor, fontSize, width, value, height)
+        public bool shared;
+        public TextTab(int xPos, int yPos, int docId, int pageNumber, string toolTip, string tabLabel, bool bold, bool italic, bool underline, string font, string fontColor, int fontSize, int width, string value, int height, bool shared) : base(xPos, yPos, docId, pageNumber, toolTip, tabLabel, bold, italic, underline, font, fontColor, fontSize, width, value, height)
+        {
+            this.shared = shared;
+        }
+
+        public TextTab(string anchorString, int anchorXOffset, int anchorYOffset, int docId, int pageNumber, string toolTip, string tabLabel, bool bold, bool italic, bool underline, string font, string fontColor, int fontSize, int width, string value, int height, bool shared) : base(anchorString, anchorXOffset, anchorYOffset, docId, pageNumber, toolTip, tabLabel, bold, italic, underline, font, fontColor, fontSize, width, value, height)
+        {
+            this.shared = shared;
+        }
+    }
+    public class TextDisplayTab : TextTab
+    {
+        public string locked = "true";
+
+        public TextDisplayTab(int xPos, int yPos, int docId, int pageNumber, string toolTip, string tabLabel, bool bold, bool italic, bool underline, string font, string fontColor, int fontSize, int width, string value, int height, bool shared) : base(xPos, yPos, docId, pageNumber, toolTip, tabLabel, bold, italic, underline, font, fontColor, fontSize, width, value, height, shared)
         {
         }
 
-        public TextTab(string anchorString, int anchorXOffset, int anchorYOffset, int docId, int pageNumber, string toolTip, string tabLabel, bool bold, bool italic, bool underline, string font, string fontColor, int fontSize, int width, string value, int height) : base(anchorString, anchorXOffset, anchorYOffset, docId, pageNumber, toolTip, tabLabel, bold, italic, underline, font, fontColor, fontSize, width, value, height)
+        public TextDisplayTab(string anchorString, int anchorXOffset, int anchorYOffset, int docId, int pageNumber, string toolTip, string tabLabel, bool bold, bool italic, bool underline, string font, string fontColor, int fontSize, int width, string value, int height, bool shared) : base(anchorString, anchorXOffset, anchorYOffset, docId, pageNumber, toolTip, tabLabel, bold, italic, underline, font, fontColor, fontSize, width, value, height, shared)
         {
+        }
+    }
+    public class TextInputTab : TextTab
+    {
+        public string locked = "false";
+        public bool required;
+
+        public TextInputTab(int xPos, int yPos, int docId, int pageNumber, string toolTip, string tabLabel, bool bold, bool italic, bool underline, string font, string fontColor, int fontSize, int width, string value, int height, bool required, bool shared) : base(xPos, yPos, docId, pageNumber, toolTip, tabLabel, bold, italic, underline, font, fontColor, fontSize, width, value, height, shared)
+        {
+            this.required = required;
+        }
+
+        public TextInputTab(string anchorString, int anchorXOffset, int anchorYOffset, int docId, int pageNumber, string toolTip, string tabLabel, bool bold, bool italic, bool underline, string font, string fontColor, int fontSize, int width, string value, int height, bool required, bool shared) : base(anchorString, anchorXOffset, anchorYOffset, docId, pageNumber, toolTip, tabLabel, bold, italic, underline, font, fontColor, fontSize, width, value, height, shared)
+        {
+            this.required = required;
         }
     }
 }

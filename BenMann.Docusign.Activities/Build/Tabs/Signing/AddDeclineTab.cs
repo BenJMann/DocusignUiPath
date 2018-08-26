@@ -1,8 +1,8 @@
-using Docusign.Revamped.DocusignTypes;
+using Docusign.DocusignTypes;
 using System.Activities;
 using System.ComponentModel;
 
-namespace BenMann.Docusign.Activities.Tabs.Signing
+namespace Docusign.Tabs.Signing
 {
     [DisplayName("Add Decline Tab")]
     public sealed class AddDeclineTab : AddButtonTab

@@ -25,7 +25,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>..\Output\bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -59,6 +59,9 @@
     </Compile>
     <Compile Include="Build\Envelopes\CreateEnvelopeActivityDesigner.xaml.cs">
       <DependentUpon>CreateEnvelopeActivityDesigner.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Build\Envelopes\ListEnvelopesActivityDesigner.xaml.cs">
+      <DependentUpon>ListEnvelopesActivityDesigner.xaml</DependentUpon>
     </Compile>
     <Compile Include="Build\Envelopes\SendEnvelopeActivityDesigner.xaml.cs">
       <DependentUpon>SendEnvelopeActivityDesigner.xaml</DependentUpon>
@@ -189,6 +192,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Build\Envelopes\CreateEnvelopeActivityDesigner.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Build\Envelopes\ListEnvelopesActivityDesigner.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -405,6 +412,15 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\ZipTab.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\DocuSignLogo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\About.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\ListEnvelopes.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

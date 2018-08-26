@@ -1,11 +1,13 @@
 ﻿using System.Activities;
 using System.ComponentModel;
 
-namespace BenMann.Docusign.Activities.Tabs
+namespace Docusign.Tabs
 {
     public abstract class AddBigDisplayItemTab : AddDisplayItemTab
     {
-        [Category("Formatting")]
+        [Category("Size")]
+        [Description("Height")]
+        [DisplayName("Height")]
         public InArgument<int> Height { get; set; }
 
         public int height;

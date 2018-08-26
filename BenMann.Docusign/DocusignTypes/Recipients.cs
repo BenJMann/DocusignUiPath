@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Docusign.Revamped.DocusignTypes
+namespace Docusign.DocusignTypes
 {
 
     public class Recipients
@@ -51,7 +51,7 @@ namespace Docusign.Revamped.DocusignTypes
                 if (intermediaries == null) intermediaries = new List<Intermediary>();
                 intermediaries.Add((Intermediary)recipient);
             }
-            if (recipient.RecipientType == "Signer")
+            if (recipient.RecipientType == "Signer" || recipient.RecipientType == "SigningGroup")
             {
                 if (signers == null) signers = new List<Signer>();
                 signers.Add((Signer)recipient);
@@ -113,13 +113,37 @@ namespace Docusign.Revamped.DocusignTypes
             this.tabs.Add(tab);
         }
     }
+    public class SigningGroup : Signer
+    {
+        [JsonIgnore]
+        public override string RecipientType
+        {
+            get { return "SigningGroup"; }
+        }
+
+        public int signingGroupId;
+
+        public SigningGroup(int routingOrder, int signingGroupId, List<Tab> tabs = null, int index = -1, string name=null, string email=null) : base(name, email, routingOrder, tabs, index)
+        {
+            this.signingGroupId = signingGroupId;
+        }
+
+        public bool ShouldSerializename()
+        {
+            return false;
+        }
+        public bool ShouldSerializeemail()
+        {
+            return false;
+        }
+    }
 
     public class Agent : Recipient
     {
         [JsonIgnore]
         public override string RecipientType
         {
-            get { return "Signer"; }
+            get { return "Agent"; }
         }
 
         public Agent(string name, string email, int routingOrder, int index = -1)
@@ -171,7 +195,7 @@ namespace Docusign.Revamped.DocusignTypes
         [JsonIgnore]
         public override string RecipientType
         {
-            get { return "Intemediary"; }
+            get { return "Intermediary"; }
         }
 
         public Intermediary(string name, string email, int routingOrder, int index = -1)

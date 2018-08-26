@@ -1,14 +1,17 @@
 ﻿using System.Activities;
 using System.ComponentModel;
 
-namespace BenMann.Docusign.Activities.Tabs
+namespace Docusign.Tabs
 {
     public abstract class AddDisplayItemTab : AddConstDisplayTab
     {
-        [Category("Formatting")]
+        [Category("Size")]
+        [Description("Width")]
         public InArgument<int> Width{ get; set; }
+
         [Category("Input")]
-        public InArgument<string> Value{ get; set; }
+        [Description("Default Value")]
+        public virtual InArgument<string> Value { get; set; }
 
         public int width;
         public string value;
@@ -19,6 +22,7 @@ namespace BenMann.Docusign.Activities.Tabs
 
             width = Width.Get(context);
             value = Value.Get(context);
+            //value = null; 
         }
         protected void InitializeDelegate(CodeActivityContext context)
         {

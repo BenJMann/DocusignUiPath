@@ -1,7 +1,8 @@
-﻿using System.Activities;
+﻿using BenMann.Docusign;
+using System.Activities;
 using System.ComponentModel;
 
-namespace BenMann.Docusign.Activities.Templates
+namespace Docusign.Tabs.Templates
 {
 
     [DisplayName("Assign Template Role")]
@@ -9,10 +10,11 @@ namespace BenMann.Docusign.Activities.Templates
     {
         [Category("Input")]
         [RequiredArgument]
-        public InArgument<object> Template { get; set; }
+        public InArgument<Template> Template { get; set; }
         [Category("Input")]
         [RequiredArgument]
         [DisplayName("Role Name")]
+        [Description("As defined in template")]
         public InArgument<string> RoleName { get; set; }
         [Category("Input")]
         [RequiredArgument]
@@ -24,7 +26,7 @@ namespace BenMann.Docusign.Activities.Templates
 
         protected override void Execute(CodeActivityContext context)
         {
-            Template template = (Template)Template.Get(context);
+            Template template = Template.Get(context);
             string roleName = RoleName.Get(context);
             string email = Email.Get(context);
             string name = Name.Get(context);

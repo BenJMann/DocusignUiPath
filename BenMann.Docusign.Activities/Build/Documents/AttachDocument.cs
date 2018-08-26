@@ -1,15 +1,14 @@
-﻿using BenMann.Docusign.DocusignTypes;
-using Docusign.Revamped.DocusignTypes;
+﻿using Docusign.DocusignTypes;
 using System.Activities;
 using System.ComponentModel;
 
-namespace BenMann.Docusign.Activities.Documents
+namespace Docusign.Documents
 {
     public sealed class AttachDocument : CodeActivity
     {
         [Category("Input")]
         [RequiredArgument]
-        public InArgument<object> Envelope { get; set; }
+        public InArgument<Envelope> Envelope { get; set; }
 
         [Category("Input")]
         [RequiredArgument]
@@ -20,11 +19,12 @@ namespace BenMann.Docusign.Activities.Documents
         public InArgument<string> Filename { get; set; }
 
         [Category("Output")]
-        public OutArgument<object> Document { get; set;  }
+        [Description("Created Document")]
+        public OutArgument<Document> Document { get; set;  }
 
         protected override void Execute(CodeActivityContext context)
         {
-            Envelope env = (Envelope)Envelope.Get(context);
+            Envelope env = Envelope.Get(context);
             string name = Name.Get(context);
             string filename = Filename.Get(context);
 

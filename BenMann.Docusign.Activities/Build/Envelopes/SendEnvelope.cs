@@ -2,9 +2,10 @@
 using System.Activities;
 using System.Net.Http;
 using System.ComponentModel;
-using BenMann.Docusign.DocusignTypes;
+using BenMann.Docusign;
+using Docusign.DocusignTypes;
 
-namespace BenMann.Docusign.Activities.Envelopes
+namespace Docusign.Envelopes
 {
     public class EnvelopeSentResponse
     {
@@ -18,9 +19,15 @@ public sealed class SendEnvelope : DocusignActivity
     {
         [Category("Input")]
         [RequiredArgument]
-        public InArgument<object> Envelope { get; set; }
+        public InArgument<Envelope> Envelope { get; set; }
+
+        [Category("Output")]
+        [DisplayName("Envelope ID")]
+        [Description("Envelope ID")]
+        public OutArgument<string> EnvelopeID { get; set; }
 
         public Envelope env;
+        EnvelopeSentResponse resObj;
 
         Action SendEnvelopeDelegate;
 
@@ -29,7 +36,7 @@ public sealed class SendEnvelope : DocusignActivity
         {
             LoadAuthentication(context);
 
-            env = (Envelope)Envelope.Get(context);
+            env = Envelope.Get(context);
 
             SendEnvelopeDelegate = new Action(_SendEnvelope);
             return SendEnvelopeDelegate.BeginInvoke(callback, state);
@@ -43,12 +50,13 @@ public sealed class SendEnvelope : DocusignActivity
             {
                 response.Throw();
             }
-            EnvelopeSentResponse resObj = response.GetData<EnvelopeSentResponse>();
+            resObj = response.GetData<EnvelopeSentResponse>();
         }
 
         protected override void EndExecute(AsyncCodeActivityContext context, IAsyncResult result)
         {
             SendEnvelopeDelegate.EndInvoke(result);
+            EnvelopeID.Set(context, resObj.envelopeId);
         }
     }
 }

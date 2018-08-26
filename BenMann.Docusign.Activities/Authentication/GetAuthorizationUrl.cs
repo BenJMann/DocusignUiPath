@@ -1,18 +1,18 @@
-﻿using System;
+﻿using BenMann.Docusign;
+using System;
 using System.Activities;
 using System.ComponentModel;
 using System.Drawing;
 
-namespace BenMann.Docusign.Activities.Authentication
+namespace Docusign.Authentication
 {
     [DisplayName("Get Authorization Url")]
-    [ToolboxBitmap(typeof(GetAuthorizationUrl), "BenMann.Docusign.Activities.GetAuthorizationUrl.bmp")]
-    [ToolboxItem(true)]
     public class GetAuthorizationUrl : NativeActivity
     {
         [Category("Output")]
         [DisplayName("Authentication Url")]
         public OutArgument<string> AuthenticationUrl { get; set; }
+
         public GetAuthorizationUrl()
         {
             base.Constraints.Add(BenMann.Docusign.Activities.Constraints.CheckParent<DocusignApplicationScope>());

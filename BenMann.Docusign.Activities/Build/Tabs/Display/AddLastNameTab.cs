@@ -1,8 +1,8 @@
-using Docusign.Revamped.DocusignTypes;
+using Docusign.DocusignTypes;
 using System.Activities;
 using System.ComponentModel;
 
-namespace BenMann.Docusign.Activities.Tabs.Display
+namespace Docusign.Tabs.Display
 {
     [DisplayName("Add Last Name Tab")]
     public sealed class AddLastNameTab : AddConstDisplayTab

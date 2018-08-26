@@ -3,7 +3,7 @@ using System.Activities;
 using System.Activities.Hosting;
 using System.Collections.Generic;
 
-namespace BenMann.Docusign.Activities
+namespace Docusign
 {
     public class BookmarkResumptionHelper : IWorkflowInstanceExtension
     {

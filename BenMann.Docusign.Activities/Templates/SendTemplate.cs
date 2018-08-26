@@ -1,16 +1,17 @@
-﻿using System;
+﻿using BenMann.Docusign;
+using System;
 using System.Activities;
 using System.ComponentModel;
 using System.Net.Http;
 
-namespace BenMann.Docusign.Activities.Templates
+namespace Docusign.Tabs.Templates
 {
     [DisplayName("Send Template")]
     public sealed class SendTemplate : DocusignActivity
     {
         [Category("Input")]
         [RequiredArgument]
-        public InArgument<object> Template { get; set; }
+        public InArgument<Template> Template { get; set; }
 
         public Template template;
 
@@ -21,7 +22,7 @@ namespace BenMann.Docusign.Activities.Templates
         {
             LoadAuthentication(context);
 
-            template = (Template)Template.Get(context);
+            template = Template.Get(context);
 
             SendTemplateDelegate = new Action(_SendTemplate);
             return SendTemplateDelegate.BeginInvoke(callback, state);

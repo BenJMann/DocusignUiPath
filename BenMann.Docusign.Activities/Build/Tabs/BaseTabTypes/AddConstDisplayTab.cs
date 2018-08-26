@@ -1,7 +1,7 @@
 ﻿using System.Activities;
 using System.ComponentModel;
 
-namespace BenMann.Docusign.Activities.Tabs
+namespace Docusign.Tabs
 {
     public enum FontNames
     {
@@ -45,8 +45,12 @@ namespace BenMann.Docusign.Activities.Tabs
         [Category("Formatting")]
         public FontNames Font { get; set; }
         [Category("Formatting")]
+        [DisplayName("Font Color")]
+        [Description("Font Color")]
         public FontColors FontColor { get; set; }
         [Category("Formatting")]
+        [DisplayName("Font Size")]
+        [Description("Font Size")]
         public InArgument<int> FontSize { get; set; }
 
         public bool bold;
@@ -66,7 +70,7 @@ namespace BenMann.Docusign.Activities.Tabs
             font = Font.ToString();
             fontColor = FontColor.ToString();
             fontSize = FontSize.Get(context);
-            if (fontSize == 0) fontSize = 12;
+            //if (fontSize == 0) fontSize = 5;
         }
     }
 }

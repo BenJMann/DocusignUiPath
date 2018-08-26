@@ -1,12 +1,15 @@
-using Docusign.Revamped.DocusignTypes;
+using Docusign.DocusignTypes;
 using System.Activities;
 using System.ComponentModel;
 
-namespace BenMann.Docusign.Activities.Tabs.Signing
+namespace Docusign.Tabs.Signing
 {
     [DisplayName("Add Initial Here Tab")]
     public sealed class AddInitialHereTab : AddTabBase
     {
+        public bool Required { get; set; } = true;
+        [DisplayName("Scale Value")]
+        [Description("Size of element")]
         public InArgument<int> ScaleValue { get; set; }
         public int scaleValue;
         protected override void Execute(CodeActivityContext context)
@@ -16,9 +19,9 @@ namespace BenMann.Docusign.Activities.Tabs.Signing
             scaleValue = ScaleValue.Get(context);
 
             if (anchorText != null)
-                initialHereTab = new InitialHereTab(anchorText, offsetX, offsetY, doc.documentId, pageNumber, toolTip, tabLabel, scaleValue);
+                initialHereTab = new InitialHereTab(anchorText, offsetX, offsetY-12, doc.documentId, pageNumber, toolTip, tabLabel, scaleValue, !Required);
             else
-                initialHereTab = new InitialHereTab(sigX, sigY, doc.documentId, pageNumber, toolTip, tabLabel, scaleValue);
+                initialHereTab = new InitialHereTab(sigX, sigY-12, doc.documentId, pageNumber, toolTip, tabLabel, scaleValue, !Required);
 
             AddTabToRecipient(initialHereTab);
         }

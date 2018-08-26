@@ -25,7 +25,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>..\Output\bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -50,12 +50,15 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Build\Envelopes\ListEnvelopes.cs" />
     <Compile Include="Build\Recipients\AddIntermediary.cs" />
     <Compile Include="Build\Recipients\AddEditor.cs" />
     <Compile Include="Build\Recipients\AddCertifiedDelivery.cs" />
     <Compile Include="Build\Recipients\AddCarbonCopy.cs" />
     <Compile Include="Build\Recipients\AddRecipientBase.cs" />
     <Compile Include="Build\Recipients\AddAgent.cs" />
+    <Compile Include="Build\Recipients\AddSigningGroup.cs" />
+    <Compile Include="Build\Tabs\Input\AddTextInputTab.cs" />
     <Compile Include="Build\Tabs\Signing\AddApproveTab.cs" />
     <Compile Include="Build\Tabs\GUI\AddCheckboxTab.cs" />
     <Compile Include="Build\Tabs\Input\AddCompanyTab.cs" />
@@ -81,8 +84,8 @@
     <Compile Include="Build\Tabs\BaseTabTypes\AddConstDisplayTab.cs" />
     <Compile Include="Build\Tabs\BaseTabTypes\AddDisplayItemTab.cs" />
     <Compile Include="Build\Tabs\BaseTabTypes\AddTabBase.cs" />
-    <Compile Include="Build\Tabs\Input\AddTextTab.cs" />
-    <Compile Include="Build\Tabs\Display\AddTitleTab.cs" />
+    <Compile Include="Build\Tabs\Display\AddTextDisplayTab.cs" />
+    <Compile Include="Build\Tabs\Input\AddTitleTab.cs" />
     <Compile Include="Build\Tabs\Input\AddZipTab.cs" />
     <Compile Include="Build\Tabs\BaseTabTypes\AddBigDisplayItemTab.cs" />
     <Compile Include="Templates\AssignTemplateRole.cs" />

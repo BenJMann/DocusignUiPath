@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Activities;
 using System.ComponentModel;
 using System.Net.Http;
+using BenMann.Docusign;
 
-namespace BenMann.Docusign.Activities.Templates
+namespace Docusign.Tabs.Templates
 {
     [DisplayName("Load Template")]
     public sealed class LoadTemplate : DocusignActivity
@@ -12,10 +13,12 @@ namespace BenMann.Docusign.Activities.Templates
         [Category("Input")]
         [RequiredArgument]
         [DisplayName("Template Name")]
+        [Description("As defined in DocuSign template editor")]
         public InArgument<string> TemplateName { get; set; }
 
         [Category("Output")]
-        public OutArgument<object> Template { get; set; }
+        [Description("Loaded Template")]
+        public OutArgument<Template> Template { get; set; }
 
         private string templateName;
         private string templateId;

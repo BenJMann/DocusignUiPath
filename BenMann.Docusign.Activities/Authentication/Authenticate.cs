@@ -1,5 +1,7 @@
-﻿using System;
+﻿using BenMann.Docusign;
+using System;
 using System.Activities;
+using System.Activities.Validation;
 using System.Activities.XamlIntegration;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,8 +10,9 @@ using System.Net.Http;
 using System.Security;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Markup;
 
-namespace BenMann.Docusign.Activities.Authentication
+namespace Docusign.Authentication
 {
     public enum Browsers
     {
@@ -32,38 +35,60 @@ namespace BenMann.Docusign.Activities.Authentication
         private const string AuthMethodInsecure = "Insecure";
         private const int BrowserLoadTimeoutDefault = 2000;
 
+        private const string ReadMeFilename = "README_DocusignAuthentication.txt";
+        private const string ReadMeUrl = "https://raw.githubusercontent.com/BenJMann/DocusignUiPath/master/AuthenticationWorkflows/"+ReadMeFilename;
         [Category("Input")]
         [DisplayName("Authentication Url")]
         public InArgument<string> AuthenticationUrl { get; set; }
 
+        [Browsable(false)]
+        public InArgument<string> AuthenticationMethodBase = "Manual";
         [Category("Input")]
-        [RequiredArgument]
-        [DisplayName("Email")]
-        public InArgument<string> Email { get; set; }
-
-        [Category("Input")]
-        //[RequiredArgument]
-        [DisplayName("Password (Insecure)")]
-        public InArgument<string> PasswordInsecure { get; set; }
-
-        [Category("Input")]
-        //[RequiredArgument]
-        [DisplayName("Password (Secure)")]
-        public InArgument<SecureString> PasswordSecure { get; set; }
-
-        [Category("Input")]
-        [RequiredArgument]
         [DisplayName("Authentication Method")]
-        public AuthMethods AuthenticationMethod { get; set; }
+        public InArgument<string> AuthenticationMethod
+        {
+            get
+            {
+                return AuthenticationMethodBase ?? "Manual";
+            }
+            set
+            {
+                AuthenticationMethodBase = value;
+            }
+        }
+        [Browsable(false)]
+        public InArgument<string> AuthenticationBrowserBase = "IE";
 
         [Category("Input")]
-        [RequiredArgument]
         [DisplayName("Authentication Browser")]
-        public Browsers AuthenticationBrowser { get; set; }
+        public InArgument<string> AuthenticationBrowser
+        {
+            get
+            {
+                return AuthenticationBrowserBase;
+            }
+            set
+            {
+                AuthenticationBrowserBase = value;
+            }
+        }
 
         [Category("Input")]
         [DisplayName("Browser Load Timeout")]
         public InArgument<int> BrowserLoadTimeout { get; set; }
+
+        [Category("Input")]
+        [DisplayName("Email")]
+        public InArgument<string> Email { get; set; }
+
+        [Category("Input")]
+        [DisplayName("Password (Insecure)")]
+        public InArgument<string> PasswordInsecure { get; set; }
+
+        [Category("Input")]
+        [DisplayName("Password (Secure)")]
+        public InArgument<SecureString> PasswordSecure { get; set; }
+
 
         public string authUrl;
         public string email;
@@ -78,17 +103,39 @@ namespace BenMann.Docusign.Activities.Authentication
         string resourceUrl;
 
         public Dictionary<string, object> authArguments;
-
+        public List<string> MahNames
+        {
+            get
+            {
+                return new List<string>
+                {
+                    "Relative Position", "Absolute Position"
+                };
+            }
+            set { }
+        }
         Action LoadFileDelegate;
 
         protected override IAsyncResult BeginExecute(AsyncCodeActivityContext context, AsyncCallback callback, object state)
         {
             authUrl = AuthenticationUrl.Get(context);
+            authMethod = AuthenticationMethod.Get(context);
+            authBrowser = AuthenticationBrowser.Get(context);
             email = Email.Get(context);
+            if (authMethod != "Manual" && email == null)
+            {
+                throw new ArgumentException("Email must be supplied with Automatic Authorization");
+            }
             passwordInsecure = PasswordInsecure.Get(context);
+            if (authMethod == "Insecure" && passwordInsecure == null)
+            {
+                throw new ArgumentException("Insecure Password must be supplied with Insecure Authentication");
+            }
             passwordSecure = PasswordSecure.Get(context);
-            authMethod = AuthenticationMethod.ToString();
-            authBrowser = AuthenticationBrowser.ToString();
+            if (authMethod == "Secure" && passwordSecure == null)
+            {
+                throw new ArgumentException("Secure Password must be supplied with Secure Authentication");
+            }
 
             browserLoadTimeout = BrowserLoadTimeout.Get(context);
             if (browserLoadTimeout == 0) browserLoadTimeout = BrowserLoadTimeoutDefault;
@@ -166,6 +213,17 @@ namespace BenMann.Docusign.Activities.Authentication
             LoadFileDelegate.EndInvoke(result);
         }
 
+        protected async void LoadReadmeFile()
+        {
+            string ReadMeFilepath = Path.Combine(AuthDirectoryName, ReadMeFilename);
+
+            if (!File.Exists(ReadMeFilepath))
+            {
+                HttpResponseMessage response = await HttpAgent.Request(HttpMethod.Get, ReadMeUrl, null, null, null);
+                string responseContent = await response.Content.ReadAsStringAsync();
+                File.WriteAllText(ReadMeFilepath, responseContent);
+            }
+        }
         protected async void LoadFile()
         {
             if (authMethod == AuthMethodManual)
@@ -174,19 +232,19 @@ namespace BenMann.Docusign.Activities.Authentication
                 return;
             }
 
-            Console.Write(filename);
 
             //Try/catch
             Directory.CreateDirectory(AuthDirectoryName);
             filepath = Path.Combine(AuthDirectoryName, filename);
             AutoResetEvent syncEvent = new AutoResetEvent(false);
 
-            if (!File.Exists(filename))
+            if (!File.Exists(filepath))
             {
-                Console.Write(filename);
                 HttpResponseMessage response = await HttpAgent.Request(HttpMethod.Get, resourceUrl, null, null, null);
                 string responseContent = await response.Content.ReadAsStringAsync();
                 File.WriteAllText(filepath, responseContent);
+
+                LoadReadmeFile();
             }
 
             ActivityXamlServicesSettings settings = new ActivityXamlServicesSettings

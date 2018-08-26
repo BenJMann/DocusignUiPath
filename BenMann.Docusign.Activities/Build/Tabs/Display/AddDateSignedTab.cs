@@ -1,12 +1,14 @@
-using Docusign.Revamped.DocusignTypes;
+using Docusign.DocusignTypes;
 using System.Activities;
 using System.ComponentModel;
 
-namespace BenMann.Docusign.Activities.Tabs.Display
+namespace Docusign.Tabs.Display
 {
     [DisplayName("Add Date Signed Tab")]
     public sealed class AddDateSignedTab : AddDisplayItemTab
     {
+        [Browsable(false)]
+        public override InArgument<string> Value { get; set; }
         protected override void Execute(CodeActivityContext context)
         {
             Initialize(context);

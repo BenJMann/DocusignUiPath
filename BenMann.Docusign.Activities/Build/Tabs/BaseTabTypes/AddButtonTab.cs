@@ -1,13 +1,17 @@
 ﻿using System.Activities;
 using System.ComponentModel;
 
-namespace BenMann.Docusign.Activities.Tabs
+namespace Docusign.Tabs
 {
     public abstract class AddButtonTab : AddConstDisplayTab
     {
-        [Category("Formatting")]
+        [Category("Size")]
+        [DisplayName("Width")]
+        [Description("Width")]
         public InArgument<int> Width { get; set; }
         [Category("Input")]
+        [DisplayName("Button Text")]
+        [Description("Text Displayed on Button")]
         public InArgument<string> ButtonText { get; set; }
 
         public int width;

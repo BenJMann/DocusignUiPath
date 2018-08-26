@@ -20,6 +20,25 @@ namespace BenMann.Docusign.Activities.Design
         public DocuSignContextDesigner()
         {
             InitializeComponent();
+            InfoIcon.Width = 16;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            InputDialogSample inputDialog = new InputDialogSample();
+            inputDialog.ShowDialog();
+        }
+
+        private void Image_MouseEnter(object sender, MouseEventArgs e)
+        {
+            InfoIcon.Width = 20;
+            Mouse.OverrideCursor = Cursors.Hand;
+        }
+
+        private void Image_MouseLeave(object sender, MouseEventArgs e)
+        {
+            InfoIcon.Width = 16;
+            Mouse.OverrideCursor = Cursors.Arrow;
         }
     }
 }

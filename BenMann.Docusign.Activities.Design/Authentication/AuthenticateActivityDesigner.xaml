@@ -1,8 +1,21 @@
 ﻿<sap:ActivityDesigner x:Class="BenMann.Docusign.Activities.Design.Authentication.AuthenticateActivityDesigner"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:s="clr-namespace:System;assembly=mscorlib"
+    xmlns:sc="clr-namespace:System.Security;assembly=mscorlib"
+    xmlns:sa="clr-namespace:System.Activities;assembly=System.Activities"
     xmlns:sap="clr-namespace:System.Activities.Presentation;assembly=System.Activities.Presentation"
-    xmlns:sapv="clr-namespace:System.Activities.Presentation.View;assembly=System.Activities.Presentation">
+    xmlns:sapv="clr-namespace:System.Activities.Presentation.View;assembly=System.Activities.Presentation"
+    xmlns:sapc="clr-namespace:System.Activities.Presentation.Converters;assembly=System.Activities.Presentation"
+    xmlns:c="clr-namespace:BenMann.Docusign.Activities.Design">
+    <sap:ActivityDesigner.Resources>
+        <ResourceDictionary>
+            <sapc:ArgumentToExpressionConverter x:Key="ArgumentToExpressionConverter" />
+            <c:ComboBoxConverter x:Key="comboBoxItemConverter"/>
+            <ResourceDictionary.MergedDictionaries>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </sap:ActivityDesigner.Resources>
     <sap:ActivityDesigner.Icon>
         <DrawingBrush>
             <DrawingBrush.Drawing>
@@ -17,4 +30,98 @@
             </DrawingBrush.Drawing>
         </DrawingBrush>
     </sap:ActivityDesigner.Icon>
+    <StackPanel>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="120"/>
+                <ColumnDefinition Width="150"/>
+            </Grid.ColumnDefinitions>
+            <Label>Method:</Label>
+            <ComboBox Grid.Column="1"
+                      SelectedValue="{Binding Path=ModelItem.AuthenticationMethod, Mode=TwoWay, Converter={StaticResource comboBoxItemConverter}, ConverterParameter=In}"  
+                      ItemsSource="{Binding AuthenticationMethods, Mode=TwoWay}"
+                            Margin="5"
+                      Name="AuthMethodComboBox"
+                      SelectionChanged="AuthMethodComboBox_SelectionChanged"></ComboBox>
+        </Grid>
+        <Grid Name="ManualAuth">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="120"/>
+                <ColumnDefinition Width="150"/>
+            </Grid.ColumnDefinitions>
+            <Label> Browser: </Label>
+            <Label Grid.Column="1"> System Default</Label>
+        </Grid>
+        <Grid Name="AutomaticAuth">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="120"/>
+                <ColumnDefinition Width="150"/>
+            </Grid.ColumnDefinitions>
+            <Label>Browser:</Label>
+            <ComboBox Grid.Column="1"
+                      SelectedValue="{Binding Path=ModelItem.AuthenticationBrowser, Mode=TwoWay, Converter={StaticResource comboBoxItemConverter}, ConverterParameter=In}"  
+                      ItemsSource="{Binding Browsers, Mode=TwoWay}"
+                            Margin="5"
+                      Name="BrowserComboBox"
+                      ></ComboBox>
+            <Label Grid.Row="1">Email:</Label>
+            <sapv:ExpressionTextBox 
+                            Expression="{Binding Path=ModelItem.Email, Mode=TwoWay, Converter={StaticResource ArgumentToExpressionConverter}, ConverterParameter=In }"
+                            ExpressionType="s:String"
+                            HintText="Docusign Email Address"
+                            OwnerActivity="{Binding Path=ModelItem}"
+                            Margin="5"
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            MaxLines="1" />
+        </Grid>
+        <Grid Name="SecureAuth">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="120"/>
+                <ColumnDefinition Width="150"/>
+            </Grid.ColumnDefinitions>
+            <Label>Password (Secure):</Label>
+            <sapv:ExpressionTextBox 
+                            Expression="{Binding Path=ModelItem.PasswordSecure, Mode=TwoWay, Converter={StaticResource ArgumentToExpressionConverter}, ConverterParameter=In }"
+                            ExpressionType="sc:SecureString"
+                            HintText="Secure Password"
+                            OwnerActivity="{Binding Path=ModelItem}"
+                            Margin="5"
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            MaxLines="1" />
+        </Grid>
+        <Grid Name="InsecureAuth">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="120"/>
+                <ColumnDefinition Width="150"/>
+            </Grid.ColumnDefinitions>
+            <Label>Password (Insecure):</Label>
+            <sapv:ExpressionTextBox 
+                            Expression="{Binding Path=ModelItem.PasswordInsecure, Mode=TwoWay, Converter={StaticResource ArgumentToExpressionConverter}, ConverterParameter=In }"
+                            ExpressionType="s:String"
+                            HintText="Insecure Password"
+                            OwnerActivity="{Binding Path=ModelItem}"
+                            Margin="5"
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            MaxLines="1" />
+        </Grid>
+    </StackPanel>
 </sap:ActivityDesigner>

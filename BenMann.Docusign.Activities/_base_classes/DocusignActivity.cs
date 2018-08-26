@@ -1,10 +1,11 @@
-﻿using System;
+﻿using BenMann.Docusign;
+using System;
 using System.Activities;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace BenMann.Docusign.Activities
+namespace Docusign
 {
 
 

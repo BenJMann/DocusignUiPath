@@ -1,36 +1,33 @@
 ﻿using System;
 using System.Windows;
+using System.Windows.Navigation;
 
 namespace BenMann.Docusign.Activities.Design
 {
     public partial class InputDialogSample : Window
     {
-        public InputDialogSample(string question, string defaultAnswer = "")
+        public InputDialogSample()
         {
             InitializeComponent();
-            lblQuestion.Content = question;
-            txtAnswer.Text = defaultAnswer;
+
+            dogLink.RequestNavigate += Navigate;
+            projectLink.RequestNavigate += Navigate;
+            instructionLink.RequestNavigate += Navigate;
         }
 
         private void btnDialogOk_Click(object sender, RoutedEventArgs e)
         {
-            this.DialogResult = true;
+            this.Close();
         }
 
-        private void Window_ContentRendered(object sender, EventArgs e)
+        private void Navigate(object sender, RequestNavigateEventArgs e)
         {
-            txtAnswer.SelectAll();
-            txtAnswer.Focus();
-        }
-
-        public string Answer
-        {
-            get { return txtAnswer.Text; }
+            System.Diagnostics.Process.Start(e.Uri.ToString());
         }
     }
 }
 /*
- *                 InputDialogSample inputDialog = new InputDialogSample("Enter yo namE", "NIAA");
+ *                 
                 if (inputDialog.ShowDialog() == true)
                     SigPositionButton.Content = inputDialog.Answer;
 */

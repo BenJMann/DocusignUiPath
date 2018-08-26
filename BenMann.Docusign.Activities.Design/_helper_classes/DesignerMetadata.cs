@@ -1,8 +1,6 @@
 ﻿using System.Activities.Presentation.Metadata;
 using System.ComponentModel;
 using System.Drawing;
-using BenMann.Docusign.Activities.Authentication;
-using BenMann.Docusign.Activities.Basic;
 using BenMann.Docusign.Activities.Design.Authentication;
 using BenMann.Docusign.Activities.Design.Build.Envelopes;
 using BenMann.Docusign.Activities.Design.Build.Recipients;
@@ -12,15 +10,17 @@ using BenMann.Docusign.Activities.Design.Build.Tabs.GUI;
 using BenMann.Docusign.Activities.Design.Build.Tabs.Input;
 using BenMann.Docusign.Activities.Design.Build.Tabs.Signing;
 using BenMann.Docusign.Activities.Design.Templates;
-using BenMann.Docusign.Activities.Documents;
-using BenMann.Docusign.Activities.Envelopes;
-using BenMann.Docusign.Activities.Recipients;
-using BenMann.Docusign.Activities.Tabs;
-using BenMann.Docusign.Activities.Tabs.Display;
-using BenMann.Docusign.Activities.Tabs.GUI;
-using BenMann.Docusign.Activities.Tabs.Input;
-using BenMann.Docusign.Activities.Tabs.Signing;
-using BenMann.Docusign.Activities.Templates;
+using Docusign;
+using Docusign.Authentication;
+using Docusign.Basic;
+using Docusign.Documents;
+using Docusign.Envelopes;
+using Docusign.Recipients;
+using Docusign.Tabs.Display;
+using Docusign.Tabs.GUI;
+using Docusign.Tabs.Input;
+using Docusign.Tabs.Signing;
+using Docusign.Tabs.Templates;
 
 namespace BenMann.Docusign.Activities.Design
 {
@@ -45,6 +45,7 @@ namespace BenMann.Docusign.Activities.Design
             //Build - Envelopes
             attributeTableBuilder.AddCustomAttributes(typeof(CreateEnvelope), new DesignerAttribute(typeof(CreateEnvelopeActivityDesigner)));
             attributeTableBuilder.AddCustomAttributes(typeof(SendEnvelope), new DesignerAttribute(typeof(SendEnvelopeActivityDesigner)));
+            attributeTableBuilder.AddCustomAttributes(typeof(ListEnvelopes), new DesignerAttribute(typeof(ListEnvelopesActivityDesigner)));
 
             //Build - Recipients
             attributeTableBuilder.AddCustomAttributes(typeof(AddAgent), new DesignerAttribute(typeof(AddAgentActivityDesigner)));
@@ -63,6 +64,7 @@ namespace BenMann.Docusign.Activities.Design
             attributeTableBuilder.AddCustomAttributes(typeof(AddFullNameTab), new DesignerAttribute(typeof(AddFullNameActivityDesigner)));
             attributeTableBuilder.AddCustomAttributes(typeof(AddLastNameTab), new DesignerAttribute(typeof(AddLastNameActivityDesigner)));
             attributeTableBuilder.AddCustomAttributes(typeof(AddNoteTab), new DesignerAttribute(typeof(AddNoteActivityDesigner)));
+            attributeTableBuilder.AddCustomAttributes(typeof(AddTextDisplayTab), new DesignerAttribute(typeof(AddTextActivityDesigner)));
             attributeTableBuilder.AddCustomAttributes(typeof(AddTitleTab), new DesignerAttribute(typeof(AddTitleActivityDesigner)));
             //Build - Tabs - GUI
             attributeTableBuilder.AddCustomAttributes(typeof(AddCheckboxTab), new DesignerAttribute(typeof(AddCheckboxActivityDesigner)));
@@ -76,7 +78,7 @@ namespace BenMann.Docusign.Activities.Design
             attributeTableBuilder.AddCustomAttributes(typeof(AddNumberTab), new DesignerAttribute(typeof(AddNumberActivityDesigner)));
             attributeTableBuilder.AddCustomAttributes(typeof(AddSignerAttachmentTab), new DesignerAttribute(typeof(AddSignerAttachmentActivityDesigner)));
             attributeTableBuilder.AddCustomAttributes(typeof(AddSSNTab), new DesignerAttribute(typeof(AddSSNActivityDesigner)));
-            attributeTableBuilder.AddCustomAttributes(typeof(AddTextTab), new DesignerAttribute(typeof(AddTextActivityDesigner)));
+            attributeTableBuilder.AddCustomAttributes(typeof(AddTextInputTab), new DesignerAttribute(typeof(AddTextActivityDesigner)));
             attributeTableBuilder.AddCustomAttributes(typeof(AddZipTab), new DesignerAttribute(typeof(AddZipActivityDesigner)));
             //Build - Tabs - Signing
             attributeTableBuilder.AddCustomAttributes(typeof(AddApproveTab), new DesignerAttribute(typeof(AddApproveActivityDesigner)));

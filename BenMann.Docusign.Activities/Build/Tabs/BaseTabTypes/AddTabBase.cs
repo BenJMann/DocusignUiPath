@@ -3,65 +3,93 @@ using System.Activities;
 using System.ComponentModel;
 using System.Windows.Markup;
 using System.IO;
-using Docusign.Revamped.DocusignTypes;
+using Docusign.DocusignTypes;
 
-namespace BenMann.Docusign.Activities.Tabs
+namespace Docusign.Tabs
 {
     public abstract class AddTabBase : CodeActivity
     {
         [Category("Input")]
         [RequiredArgument]
-        public InArgument<object> Document { get; set; }
+        [Description("Document")]
+        public InArgument<Document> Document { get; set; }
 
         [Category("Input")]
         [RequiredArgument]
-        public InArgument<object> Recipient { get; set; }
+        [Description("Signer")]
+        public InArgument<Recipient> Signer { get; set; }
 
-        [Category("Signature: Relative Anchor")]
+        [Category("Position Relative")]
         [RequiredArgument]
         [OverloadGroup("RelativeSignature")]
         [DefaultValue(null)]
         [DisplayName("Anchor Text")]
+        [Description("Text to find in the document")]
         public InArgument<string> AnchorText { get; set; }
 
-        [Category("Signature: Relative Anchor")]
+        [Category("Position Relative")]
         [RequiredArgument]
         [OverloadGroup("RelativeSignature")]
         [DependsOn("AnchorText")]
         [DefaultValue(null)]
         [DisplayName("Offset X")]
+        [Description("Relative to Anchor Text")]
         public InArgument<int> OffsetX { get; set; }
 
-        [Category("Signature: Relative Anchor")]
+        [Category("Position Relative")]
         [RequiredArgument]
         [OverloadGroup("RelativeSignature")]
         [DependsOn("AnchorText")]
         [DefaultValue(null)]
         [DisplayName("Offset Y")]
+        [Description("Relative to Anchor Text")]
         public InArgument<int> OffsetY { get; set; }
 
 
-        [Category("Signature: Absolute Position")]
+        [Category("Position Absolute")]
         [RequiredArgument]
         [OverloadGroup("AbsoluteSignature")]
         [DefaultValue(null)]
         [DisplayName("Position X")]
+        [Description("Absolute X position")]
         public InArgument<int> PositionX { get; set; }
 
-        [Category("Signature: Absolute Position")]
+        [Category("Position Absolute")]
         [RequiredArgument]
         [OverloadGroup("AbsoluteSignature")]
         [DependsOn("SignatureXPosition")]
         [DefaultValue(null)]
         [DisplayName("Position Y")]
+        [Description("Absolute Y position")]
         public InArgument<int> PositionY { get; set; }
 
         [Category("Metadata")]
+        [DisplayName("Tab Label")]
+        [Description("For use with Formula Tab")]
         public InArgument<string> TabLabel { get; set; }
         [Category("MetaData")]
+        [Description("Hover Display")]
+        [DisplayName("Tool Tip")]
         public InArgument<string> ToolTip { get; set; }
+
+        [Browsable(false)]
+        private InArgument<int> PageNumberImplementation { get; set; } = 1;
+
         [Category("Input")]
-        public InArgument<int> PageNumber { get; set; }
+        [RequiredArgument]
+        [Description("Page of Document to display Tab")]
+        [DisplayName("Page Number")]
+        public InArgument<int> PageNumber
+        {
+            get
+            {
+                return PageNumberImplementation;
+            }
+            set
+            {
+                PageNumberImplementation = value;
+            }
+        }
 
         protected Document doc;
         protected Recipient rec;
@@ -71,8 +99,9 @@ namespace BenMann.Docusign.Activities.Tabs
 
         protected void Initialize(CodeActivityContext context)
         {
-            doc = (Document)Document.Get(context);
-            rec = (Recipient)Recipient.Get(context);
+            doc = Document.Get(context);
+            rec = Signer.Get(context);
+            if (rec.RecipientType != "Signer") throw new ArgumentException("Only Signers can have tabs added to them, not other Recipient types");
 
             sigX = PositionX.Get(context);
             sigY = PositionY.Get(context);

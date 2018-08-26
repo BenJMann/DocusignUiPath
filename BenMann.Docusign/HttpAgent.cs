@@ -90,7 +90,8 @@ namespace BenMann.Docusign
                 queryString = "?";
                 foreach (var item in query)
                 {
-                    queryString += item.Key + "=" + item.Value + "&";
+                    if (item.Value != null)
+                        queryString += item.Key + "=" + item.Value + "&";
                 }
                 queryString = queryString.Substring(0, queryString.Length - 1);
             }

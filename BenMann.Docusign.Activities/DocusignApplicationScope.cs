@@ -1,31 +1,64 @@
-﻿using System;
+﻿using BenMann.Docusign;
+using Docusign.Authentication;
+using System;
 using System.Activities;
 using System.Activities.Statements;
 using System.ComponentModel;
 using System.Drawing;
-using BenMann.Docusign.Activities.Authentication;
+using System.Runtime.InteropServices;
+using System.Security;
 
-namespace BenMann.Docusign.Activities
-{
+namespace Docusign { 
     [DisplayName("DocuSign Application Scope")]
     public class DocusignApplicationScope : AsyncNativeActivity
     {
-        [Category("Input")]
-        //[RequiredArgument]
+        [Category("Authentication")]
+        [RequiredArgument]
+        [Description("API endpoint for DocuSign")]
+        [DisplayName("DocuSign API Url")]
         public InArgument<string> RestApiUrl { get; set; }
-        //[RequiredArgument]
-        [Category("Input")]
+        [RequiredArgument]
+        [Category("Authentication")]
+        [DisplayName("Client ID")]
+        [Description("DocuSign Integrator Credentials")]
         public InArgument<string> ClientId { get; set; }
-        //[RequiredArgument]
-        [Category("Input")] 
-        public InArgument<string> ClientSecret { get; set; }
-        //[RequiredArgument]
-        [Category("Input")]
+
+        [OverloadGroup("G1")]
+        [Category("Authentication")]
+        [DisplayName("Client Secret - Insecure")]
+        [Description("DocuSign Integrator Credential")]
+        public InArgument<string> ClientSecretInsecure { get; set; }
+
+        [OverloadGroup("G1")]
+        [Category("Authentication")]
+        [DisplayName("Client Secret - Secure")]
+        [Description("DocuSign Integrator Credential")]
+        public InArgument<SecureString> ClientSecretSecure { get; set; }
+
+        [RequiredArgument]
+        [DisplayName("Redirect Url")]
+        [Category("Authentication")]
+        [Description("DocuSign Integrator Credential")]
         public InArgument<string> RedirectUrl { get; set; }
 
-        [Category("Input")]
+        [Browsable(false)]
+        public InArgument<int> timeoutMSImplementation = 10000;
+
+        [Category("Authentication")]
+        [DisplayName("Timeout MS")]
+        [Description("Timeout for authentication")]
         [RequiredArgument]
-        public InArgument<int> TimeoutMS { get; set; }
+        public InArgument<int> TimeoutMS
+        {
+            get
+            {
+                return timeoutMSImplementation;
+            }
+            set
+            {
+                timeoutMSImplementation = value;
+            }
+        }
 
         [Browsable(false)]
         public ActivityAction<AuthenticationAgent> AuthBody { get; set; }
@@ -64,14 +97,21 @@ namespace BenMann.Docusign.Activities
 
         protected override IAsyncResult BeginExecute(NativeActivityContext context, AsyncCallback callback, object state)
         {
-            string RestApiUrl = "https://account-d.docusign.com/";
-            if (!RestApiUrl.EndsWith("/")) RestApiUrl += "/";
-            string client_id = "33a8e07a-4345-43ab-8537-8abd586e3239";
-            string client_secret = "241ac621-d800-42fa-9790-d7809bcfe37f";
-            string redirect_uri = "http://localhost:5000/auth/callback";
-            int serverTimeout = TimeoutMS.Get(context);
+            
+            string restApiUrl = RestApiUrl.Get(context);
+            if (!restApiUrl.EndsWith("/")) restApiUrl += "/";
+            string client_id = ClientId.Get(context);
+            string client_secret;
+            if (ClientSecretSecure.Get(context) != null)
+                client_secret = SecureStringToString(ClientSecretSecure.Get(context));
+            else
+                client_secret = ClientSecretInsecure.Get(context);
 
-            authAgent = new AuthenticationAgent(RestApiUrl, client_id, client_secret, redirect_uri, serverTimeout);
+            string redirect_uri = RedirectUrl.Get(context);
+            int serverTimeout = TimeoutMS.Get(context);
+            
+
+            authAgent = new AuthenticationAgent(restApiUrl, client_id, client_secret, redirect_uri, serverTimeout);
 
             authAgent.GetAuthUrl();
 
@@ -129,6 +169,20 @@ namespace BenMann.Docusign.Activities
                                  ActivityInstance completedInstance)
         {
             //Pass
+        }
+
+        string SecureStringToString(SecureString value)
+        {
+            IntPtr valuePtr = IntPtr.Zero;
+            try
+            {
+                valuePtr = Marshal.SecureStringToGlobalAllocUnicode(value);
+                return Marshal.PtrToStringUni(valuePtr);
+            }
+            finally
+            {
+                Marshal.ZeroFreeGlobalAllocUnicode(valuePtr);
+            }
         }
 
     }

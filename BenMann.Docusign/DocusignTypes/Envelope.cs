@@ -1,10 +1,9 @@
-﻿using Docusign.Revamped.DocusignTypes;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
 
-namespace BenMann.Docusign.DocusignTypes
+namespace Docusign.DocusignTypes
 {
     public class Envelope
     {
@@ -46,8 +45,27 @@ namespace BenMann.Docusign.DocusignTypes
         }
     }
 
-   
-    
+    public enum FromToStatusTypes
+    {
+        Any, Voided, Changed, Created, Deleted, Sent, Delivered, Signed, Completed, Declined, TimedOut, Processing
+    }
+    public class EnvelopeResponse
+    {
+        public List<EnvelopeInfo> envelopes;
+    }
+
+    public class EnvelopeInfo
+    {
+        public EnvelopeInfo()
+        {
+
+        }
+        public string envelopeId;
+        public string status;
+        public string statusChangedDateTime;
+    }
+
+
 
 }
 

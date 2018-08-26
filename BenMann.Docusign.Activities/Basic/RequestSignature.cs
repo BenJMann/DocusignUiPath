@@ -1,5 +1,5 @@
-﻿using BenMann.Docusign.DocusignTypes;
-using Docusign.Revamped.DocusignTypes;
+﻿using BenMann.Docusign;
+using Docusign.DocusignTypes;
 using System;
 using System.Activities;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.IO;
 using System.Net.Http;
 using System.Windows.Markup;
 
-namespace BenMann.Docusign.Activities.Basic
+namespace Docusign.Basic
 {
     [DisplayName("Request Signature")]
     public class RequestSignature : DocusignActivity
@@ -129,9 +129,9 @@ namespace BenMann.Docusign.Activities.Basic
 
             SignHereTab signHereTab;
             if (anchorText != null)
-                signHereTab = new SignHereTab(anchorText, offsetX, offsetY, docId, 1, null, null, 1);
+                signHereTab = new SignHereTab(anchorText, offsetX, offsetY, docId, 1, null, null, 1, false);
             else
-                signHereTab = new SignHereTab(sigX, sigY, docId, 1, null, null, 1);
+                signHereTab = new SignHereTab(sigX, sigY, docId, 1, null, null, 1, false);
 
             List<Tab> tabs = new List<Tab>() { signHereTab };
             Signer r1signer = new Signer(recipientName, recipientEmail, routingOrder, tabs, recptId);

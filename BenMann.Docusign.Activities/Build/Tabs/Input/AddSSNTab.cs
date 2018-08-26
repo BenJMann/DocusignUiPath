@@ -1,23 +1,25 @@
-using Docusign.Revamped.DocusignTypes;
+using Docusign.DocusignTypes;
 using System.Activities;
 using System.ComponentModel;
 
-namespace BenMann.Docusign.Activities.Tabs.Input
+namespace Docusign.Tabs.Input
 {
     [DisplayName("Add SSN Tab")]
     public sealed class AddSSNTab : AddDisplayItemTab
     {
+        public bool Shared { get; set; }
+        public bool Required { get; set; }
         protected override void Execute(CodeActivityContext context)
         {
             Initialize(context);
-            SSNTab sSNTab;
+            SSNTab ssnTab;
 
             if (anchorText != null)
-                sSNTab = new SSNTab(anchorText, offsetX, offsetY, doc.documentId, pageNumber, toolTip, tabLabel, bold, italic, underline, font, fontColor, fontSize, width, value);
+                ssnTab = new SSNTab(anchorText, offsetX, offsetY, doc.documentId, pageNumber, toolTip, tabLabel, bold, italic, underline, font, fontColor, fontSize, width, value, Required, Shared);
             else
-                sSNTab = new SSNTab(sigX, sigY, doc.documentId, pageNumber, toolTip, tabLabel, bold, italic, underline, font, fontColor, fontSize, width, value);
+                ssnTab = new SSNTab(sigX, sigY, doc.documentId, pageNumber, toolTip, tabLabel, bold, italic, underline, font, fontColor, fontSize, width, value, Required, Shared);
 
-            AddTabToRecipient(sSNTab);
+            AddTabToRecipient(ssnTab);
         }
     }
 }

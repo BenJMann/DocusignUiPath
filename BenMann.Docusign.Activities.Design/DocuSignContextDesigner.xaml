@@ -6,7 +6,7 @@
     xmlns:sap="clr-namespace:System.Activities.Presentation;assembly=System.Activities.Presentation"
     xmlns:sapv="clr-namespace:System.Activities.Presentation.View;assembly=System.Activities.Presentation"
     xmlns:sapc="clr-namespace:System.Activities.Presentation.Converters;assembly=System.Activities.Presentation">
-    
+
     <sap:ActivityDesigner.Resources>
         <ResourceDictionary>
             <sapc:ArgumentToExpressionConverter x:Key="ArgumentToExpressionConverter" />
@@ -28,6 +28,18 @@
     </sap:ActivityDesigner.Icon>
     <Grid MinWidth="320">
         <StackPanel>
+            <StackPanel HorizontalAlignment="Right"  Margin="0 0 0 5" Width="20" Height="20">
+                <Button HorizontalAlignment="Center" VerticalAlignment="Center"
+                    Name="InfoIcon"
+                    Click="Button_Click"
+                    MouseEnter="Image_MouseEnter" MouseLeave="Image_MouseLeave">
+                    <Button.Template>
+                        <ControlTemplate>
+                            <Image Name="InfoIcon" Source="Resources/About.png" />
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </StackPanel>
             <Border BorderBrush="#ccc" BorderThickness="1" CornerRadius="1" Margin="0 0 0 10">
                 <sap:WorkflowItemPresenter x:Uid="sad:WorkflowItemPresenter_1"  AutomationProperties.AutomationId="Activity" Margin="0,10,0,0"
                             Item="{Binding Path=ModelItem.AuthBody.Handler, Mode=TwoWay}" AllowedItemType="{x:Type sa:Activity}" HintText="Drop activity here" MinWidth="400" DockPanel.Dock="Bottom" />

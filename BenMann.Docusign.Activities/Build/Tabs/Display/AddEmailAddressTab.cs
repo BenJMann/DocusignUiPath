@@ -1,15 +1,12 @@
-using Docusign.Revamped.DocusignTypes;
+using Docusign.DocusignTypes;
 using System.Activities;
 using System.ComponentModel;
 
-namespace BenMann.Docusign.Activities.Tabs.Display
+namespace Docusign.Tabs.Display
 {
     [DisplayName("Add Email Address Tab")]
     public sealed class AddEmailAddressTab : AddConstDisplayTab
     {
-        [Category("Input")]
-        public InArgument<string> Value { get; set; }
-        public string value;
 
         protected override void Execute(CodeActivityContext context)
         {
@@ -17,9 +14,9 @@ namespace BenMann.Docusign.Activities.Tabs.Display
             EmailAddressTab emailAddressTab;
 
             if (anchorText != null)
-                emailAddressTab = new EmailAddressTab(anchorText, offsetX, offsetY, doc.documentId, pageNumber, toolTip, tabLabel, bold, italic, underline, font, fontColor, fontSize, value);
+                emailAddressTab = new EmailAddressTab(anchorText, offsetX, offsetY, doc.documentId, pageNumber, toolTip, tabLabel, bold, italic, underline, font, fontColor, fontSize, null);
             else
-                emailAddressTab = new EmailAddressTab(sigX, sigY, doc.documentId, pageNumber, toolTip, tabLabel, bold, italic, underline, font, fontColor, fontSize, value);
+                emailAddressTab = new EmailAddressTab(sigX, sigY, doc.documentId, pageNumber, toolTip, tabLabel, bold, italic, underline, font, fontColor, fontSize, null);
 
             AddTabToRecipient(emailAddressTab);
         }

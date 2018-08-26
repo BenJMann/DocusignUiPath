@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Docusign.Revamped.DocusignTypes
+namespace Docusign.DocusignTypes
 {
     public class Document
     {
