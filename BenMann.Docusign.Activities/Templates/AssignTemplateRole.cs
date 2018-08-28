@@ -2,7 +2,7 @@
 using System.Activities;
 using System.ComponentModel;
 
-namespace Docusign.Tabs.Templates
+namespace Docusign.Templates
 {
 
     [DisplayName("Assign Template Role")]

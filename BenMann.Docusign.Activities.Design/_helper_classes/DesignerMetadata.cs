@@ -20,7 +20,7 @@ using Docusign.Tabs.Display;
 using Docusign.Tabs.GUI;
 using Docusign.Tabs.Input;
 using Docusign.Tabs.Signing;
-using Docusign.Tabs.Templates;
+using Docusign.Templates;
 
 namespace BenMann.Docusign.Activities.Design
 {

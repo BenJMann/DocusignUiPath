@@ -5,7 +5,7 @@ using System.ComponentModel;
 using System.Net.Http;
 using BenMann.Docusign;
 
-namespace Docusign.Tabs.Templates
+namespace Docusign.Templates
 {
     [DisplayName("Load Template")]
     public sealed class LoadTemplate : DocusignActivity

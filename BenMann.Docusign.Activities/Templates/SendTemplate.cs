@@ -4,7 +4,7 @@ using System.Activities;
 using System.ComponentModel;
 using System.Net.Http;
 
-namespace Docusign.Tabs.Templates
+namespace Docusign.Templates
 {
     [DisplayName("Send Template")]
     public sealed class SendTemplate : DocusignActivity
