@@ -39,7 +39,7 @@ The Authentication area, and the DocuSign activity area.
 * The DocuSign Activity area is for working with the actual DocuSign Activities.
 
 ## Working with the Activity Pack
-![Screenshot][screenshot.png]
+![Screenshot](screenshot.png)
 
 ### Authentication
 
