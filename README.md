@@ -1,12 +1,8 @@
 # DocuSign Activity Pack for UiPath
 
-DocuSign Activity Pack for UiPath.
-
 Please see the Introduction Youtube video for a run-down on how to use this activity.
 
-<a href="http://www.youtube.com/watch?feature=player_embedded&v=I_azDD15igo
-" target="_blank"><img src="http://img.youtube.com/vi/I_azDD15igo/0.jpg" 
-alt="DocuSign Activity Intro Video" width="240" height="180" border="10" /></a>
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=I_azDD15igo" target="_blank"><img src="http://img.youtube.com/vi/I_azDD15igo/0.jpg" alt="DocuSign Activity Intro Video" width="240" height="180" border="10" /></a>
 
 ## Getting Started
 
@@ -209,6 +205,8 @@ A template is sent by:
 ## Envelope Status Query Activities
 
 It's possible to retrieve the status of envelopes that have been sent, and take according action. This can be useful to continue the automation of a process, once an envelope has been completed.
+
+**Warning: DocuSign require that you run this activity no more than every 15 minutes. If you poll the server more than this, you will struggle to get your API key promoted from a development to a production key**
 
 In the Envelopes Category, you will find a List Envelopes activity. This will retrieve the envelopes on the DocuSign server, along with their current status. There are various ways to search and filter the envelopes that are returned. These are:
 * From Date - The date at which to begin the search

@@ -1,20 +1,19 @@
 ﻿<Window x:Class="BenMann.Docusign.Activities.Design.InputDialogSample"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Docusign" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen"
+        Title="Docusign Activity Pack" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen"
         >
     
     <StackPanel Margin="15">
         <DockPanel>
-            <TextBlock HorizontalAlignment="Left" Margin="5 13 0 0" FontSize="18" TextDecorations="Underline">Docusign Activity Collection</TextBlock>
+            <TextBlock HorizontalAlignment="Left" Margin="5 13 0 0" FontSize="18" TextDecorations="Underline">Docusign Activity Pack</TextBlock>
             <Image HorizontalAlignment="Right" Source="Resources/DocuSignLogo.png" Width="100"></Image>
         </DockPanel>
         <Separator Margin="5"/>
         <TextBlock Padding="10" LineHeight="18 ">
-            Hello I'm going to explain how to use this plugin here, or link to instructions<LineBreak/>
-            Please click on this link for the instructions <Hyperlink Name="instructionLink" NavigateUri="www.uipath.com">Here</Hyperlink><LineBreak/>
-            Or click here to see some funny dog videos: <Hyperlink Name="dogLink" NavigateUri="https://www.youtube.com/watch?v=aEzZLXBH3rU">DOGS!</Hyperlink><LineBreak/>
-            Here's the link to the project page: <Hyperlink Name="projectLink" NavigateUri="https://github.com/BenJMann/DocusignUiPath">Here</Hyperlink>
+            If you would like more information on the DocuSign Activity pack, please see one of the below links.<LineBreak/>
+            For an introductory video, please see <Hyperlink Name="instructionLink" NavigateUri="https://www.youtube.com/watch?v=I_azDD15igo">Here</Hyperlink><LineBreak/>
+            For documentation, and the project page, please see: <Hyperlink Name="projectLink" NavigateUri="https://github.com/BenJMann/DocusignUiPath">Here</Hyperlink>
         </TextBlock>
 
         <WrapPanel  HorizontalAlignment="Right" Margin="0,15,0,0">

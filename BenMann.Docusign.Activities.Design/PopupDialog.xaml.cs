@@ -10,7 +10,6 @@ namespace BenMann.Docusign.Activities.Design
         {
             InitializeComponent();
 
-            dogLink.RequestNavigate += Navigate;
             projectLink.RequestNavigate += Navigate;
             instructionLink.RequestNavigate += Navigate;
         }
