@@ -63,14 +63,14 @@
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
   <Sequence sap2010:WorkflowViewState.IdRef="Sequence_1">
-    <d:DocusignApplicationScope ClientSecretSecure="{x:Null}" ClientId="573b1d69-7afc-4978-96b3-a0d2896d8ed4" ClientSecretInsecure="b713deb4-9be4-4e4b-bf35-c8ad8e1fe50e" DisplayName="DocuSign Application Scope" sap2010:WorkflowViewState.IdRef="DocusignApplicationScope_3" RedirectUrl="http://localhost:5000" RestApiUrl="https://account-d.docusign.com/" TimeoutMS="10000">
+    <d:DocusignApplicationScope ClientId="{x:Null}" ClientSecretInsecure="{x:Null}" ClientSecretSecure="{x:Null}" DisplayName="DocuSign Application Scope" sap2010:WorkflowViewState.IdRef="DocusignApplicationScope_3" RedirectUrl="http://localhost:5000" RestApiUrl="https://account-d.docusign.com/" TimeoutMS="10000">
       <d:DocusignApplicationScope.AuthBody>
         <ActivityAction x:TypeArguments="bd:AuthenticationAgent">
           <ActivityAction.Argument>
             <DelegateInArgument x:TypeArguments="bd:AuthenticationAgent" Name="authAgent" />
           </ActivityAction.Argument>
           <Sequence DisplayName="Authentication" sap2010:WorkflowViewState.IdRef="Sequence_6">
-            <da:Authenticate AuthenticationUrl="{x:Null}" BrowserLoadTimeout="{x:Null}" PasswordSecure="{x:Null}" AuthenticationBrowser="IE" AuthenticationMethod="Insecure" Email="ben.mann108@gmail.com" sap2010:WorkflowViewState.IdRef="Authenticate_3" PasswordInsecure="d0cusignBats">
+            <da:Authenticate AuthenticationUrl="{x:Null}" BrowserLoadTimeout="{x:Null}" Email="{x:Null}" PasswordInsecure="{x:Null}" PasswordSecure="{x:Null}" AuthenticationBrowser="IE" AuthenticationMethod="Insecure" sap2010:WorkflowViewState.IdRef="Authenticate_3">
               <da:Authenticate.MahNames>
                 <scg:List x:TypeArguments="x:String" Capacity="4">
                   <x:String>Relative Position</x:String>
@@ -101,7 +101,7 @@
         </ActivityAction>
       </d:DocusignApplicationScope.MainBody>
     </d:DocusignApplicationScope>
-    <sads:DebugSymbol.Symbol>d0BDOlxVc2Vyc1xiZW5tYVxEb2N1bWVudHNcVWlQYXRoXERvY3VzaWduQXV0aGVudGljYXRpb25cTWFpbi54YW1sJEEDaQ4CAQFCBWciAgECQoQBQqoBAgEsQuwCQvMCAgErQkhCbgIBKkKdAkK0AgIBKULAAkLhAgIBKEgLURYCASJZC2QWAgEDSQ1QHwIBI18NX58BAgEeYA1ggwICARdhDWHRAQIBD2INYp0CAgEHYw1jmQECAQRJjgJJnAICASdJtAFJywECASZJiQFJjQECASVJowFJrQECASRfjwFfnAECASFfR19TAgEfYEdgUwIBHGBzYL0BAgEbYF1gaQIBGWD2AWCAAgIBGGE6YVECARZhywFhzgECARVhsAFhvQECARNhW2FnAgERYZsBYaUBAgEQYocBYpMBAgENYtIBYtUBAgEMYuABYuUBAgELYo0CYpoCAgEJYvABYvUBAgEIY1ljZQIBBQ==</sads:DebugSymbol.Symbol>
+    <sads:DebugSymbol.Symbol>d0BDOlxVc2Vyc1xiZW5tYVxEb2N1bWVudHNcVWlQYXRoXERvY3VzaWduQXV0aGVudGljYXRpb25cTWFpbi54YW1sIEEDaQ4CAQFCBWciAgECQrQCQrsCAgEoQuUBQvwBAgEnQogCQqkCAgEmSAtRFgIBIlkLZBYCAQNJDVAfAgEjXw1fnwECAR5gDWCDAgIBF2ENYdEBAgEPYg1inQICAQdjDWOZAQIBBEm2AUm6AQIBJUnQAUnaAQIBJF+PAV+cAQIBIV9HX1MCAR9gR2BTAgEcYHNgvQECARtgXWBpAgEZYPYBYIACAgEYYTphUQIBFmHLAWHOAQIBFWGwAWG9AQIBE2FbYWcCARFhmwFhpQECARBihwFikwECAQ1i0gFi1QECAQxi4AFi5QECAQtijQJimgICAQli8AFi9QECAQhjWWNlAgEF</sads:DebugSymbol.Symbol>
   </Sequence>
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>
