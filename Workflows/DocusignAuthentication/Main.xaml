@@ -1,0 +1,139 @@
+﻿<Activity mc:Ignorable="sap sap2010 sads" x:Class="Main" mva:VisualBasic.Settings="{x:Null}" sap2010:WorkflowViewState.IdRef="Main_1"
+ xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+ xmlns:bd="clr-namespace:BenMann.Docusign;assembly=Docusign.Revamped"
+ xmlns:d="clr-namespace:Docusign;assembly=BenMann.Docusign.Activities"
+ xmlns:da="clr-namespace:Docusign.Authentication;assembly=BenMann.Docusign.Activities"
+ xmlns:dd="clr-namespace:Docusign.Documents;assembly=BenMann.Docusign.Activities"
+ xmlns:dd1="clr-namespace:Docusign.DocusignTypes;assembly=Docusign.Revamped"
+ xmlns:de="clr-namespace:Docusign.Envelopes;assembly=BenMann.Docusign.Activities"
+ xmlns:dr="clr-namespace:Docusign.Recipients;assembly=BenMann.Docusign.Activities"
+ xmlns:dts="clr-namespace:Docusign.Tabs.Signing;assembly=BenMann.Docusign.Activities"
+ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities"
+ xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
+ xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
+ xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
+ xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+ xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>Docusign.DocusignTypes</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>UiPath.Core</AssemblyReference>
+      <AssemblyReference>UiPath.Core.Activities</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>Docusign.Revamped</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <d:DocusignApplicationScope ClientSecretSecure="{x:Null}" ClientId="573b1d69-7afc-4978-96b3-a0d2896d8ed4" ClientSecretInsecure="b713deb4-9be4-4e4b-bf35-c8ad8e1fe50e" DisplayName="DocuSign Application Scope" sap2010:WorkflowViewState.IdRef="DocusignApplicationScope_3" RedirectUrl="http://localhost:5000" RestApiUrl="https://account-d.docusign.com/" TimeoutMS="10000">
+      <d:DocusignApplicationScope.AuthBody>
+        <ActivityAction x:TypeArguments="bd:AuthenticationAgent">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="bd:AuthenticationAgent" Name="authAgent" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Authentication" sap2010:WorkflowViewState.IdRef="Sequence_6">
+            <da:Authenticate AuthenticationUrl="{x:Null}" BrowserLoadTimeout="{x:Null}" PasswordSecure="{x:Null}" AuthenticationBrowser="IE" AuthenticationMethod="Insecure" Email="ben.mann108@gmail.com" sap2010:WorkflowViewState.IdRef="Authenticate_3" PasswordInsecure="d0cusignBats">
+              <da:Authenticate.MahNames>
+                <scg:List x:TypeArguments="x:String" Capacity="4">
+                  <x:String>Relative Position</x:String>
+                  <x:String>Absolute Position</x:String>
+                </scg:List>
+              </da:Authenticate.MahNames>
+            </da:Authenticate>
+          </Sequence>
+        </ActivityAction>
+      </d:DocusignApplicationScope.AuthBody>
+      <d:DocusignApplicationScope.MainBody>
+        <ActivityAction x:TypeArguments="bd:AuthenticationAgent">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="bd:AuthenticationAgent" Name="authAgent" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Docusign Activities" sap2010:WorkflowViewState.IdRef="Sequence_7">
+            <Sequence.Variables>
+              <Variable x:TypeArguments="dd1:Envelope" Name="Envelope" />
+              <Variable x:TypeArguments="dd1:Document" Name="Document" />
+              <Variable x:TypeArguments="dd1:Recipient" Name="recipient" />
+            </Sequence.Variables>
+            <de:CreateEnvelope DisplayName="Create envelope" Envelope="[Envelope]" sap2010:WorkflowViewState.IdRef="CreateEnvelope_2" Subject="please sign" />
+            <dd:AttachDocument DisplayName="Attach document" Document="[Document]" Envelope="[Envelope]" Filename="C:\Users\benma\Documents\DocuSignResources\Documents\GDPRDeclaration.pdf" sap2010:WorkflowViewState.IdRef="AttachDocument_2" Name="Document" />
+            <dr:AddSigner DisplayName="Add Signer" Email="ben.mann108@gmail.com" Envelope="[Envelope]" sap2010:WorkflowViewState.IdRef="AddSigner_2" Name="Ben Mann" Recipient="[recipient]" RoutingOrder="1" />
+            <dts:AddSignHereTab ScaleValue="{x:Null}" TabLabel="{x:Null}" ToolTip="{x:Null}" DisplayName="Add Sign Here Tab" Document="[Document]" sap2010:WorkflowViewState.IdRef="AddSignHereTab_2" PageNumber="1" PositionX="300" PositionY="600" Required="True" Signer="[recipient]" />
+            <de:SendEnvelope EnvelopeID="{x:Null}" DisplayName="Send envelope" Envelope="[Envelope]" sap2010:WorkflowViewState.IdRef="SendEnvelope_2" />
+          </Sequence>
+        </ActivityAction>
+      </d:DocusignApplicationScope.MainBody>
+    </d:DocusignApplicationScope>
+    <sads:DebugSymbol.Symbol>d0BDOlxVc2Vyc1xiZW5tYVxEb2N1bWVudHNcVWlQYXRoXERvY3VzaWduQXV0aGVudGljYXRpb25cTWFpbi54YW1sJEEDaQ4CAQFCBWciAgECQoQBQqoBAgEsQuwCQvMCAgErQkhCbgIBKkKdAkK0AgIBKULAAkLhAgIBKEgLURYCASJZC2QWAgEDSQ1QHwIBI18NX58BAgEeYA1ggwICARdhDWHRAQIBD2INYp0CAgEHYw1jmQECAQRJjgJJnAICASdJtAFJywECASZJiQFJjQECASVJowFJrQECASRfjwFfnAECASFfR19TAgEfYEdgUwIBHGBzYL0BAgEbYF1gaQIBGWD2AWCAAgIBGGE6YVECARZhywFhzgECARVhsAFhvQECARNhW2FnAgERYZsBYaUBAgEQYocBYpMBAgENYtIBYtUBAgEMYuABYuUBAgELYo0CYpoCAgEJYvABYvUBAgEIY1ljZQIBBQ==</sads:DebugSymbol.Symbol>
+  </Sequence>
+  <sap2010:WorkflowViewState.ViewStateManager>
+    <sap2010:ViewStateManager>
+      <sap2010:ViewStateData Id="Authenticate_3" sap:VirtualizedContainerService.HintSize="284.8,168" />
+      <sap2010:ViewStateData Id="Sequence_6" sap:VirtualizedContainerService.HintSize="307.2,292.8">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="CreateEnvelope_2" sap:VirtualizedContainerService.HintSize="504,22.4" />
+      <sap2010:ViewStateData Id="AttachDocument_2" sap:VirtualizedContainerService.HintSize="504,70.4" />
+      <sap2010:ViewStateData Id="AddSigner_2" sap:VirtualizedContainerService.HintSize="504,22.4" />
+      <sap2010:ViewStateData Id="AddSignHereTab_2" sap:VirtualizedContainerService.HintSize="504,22.4" />
+      <sap2010:ViewStateData Id="SendEnvelope_2" sap:VirtualizedContainerService.HintSize="504,22.4" />
+      <sap2010:ViewStateData Id="Sequence_7" sap:VirtualizedContainerService.HintSize="526.4,444.8">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="DocusignApplicationScope_3" sap:VirtualizedContainerService.HintSize="542.4,921.6" />
+      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="564.8,1046.4">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Main_1" sap:VirtualizedContainerService.HintSize="604.8,1126.4" />
+    </sap2010:ViewStateManager>
+  </sap2010:WorkflowViewState.ViewStateManager>
+</Activity>

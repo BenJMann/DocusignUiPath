@@ -1,0 +1,544 @@
+﻿<Activity mc:Ignorable="sap sap2010 sads" x:Class="Main" mva:VisualBasic.Settings="{x:Null}" sap2010:WorkflowViewState.IdRef="Main_1"
+ xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+ xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+ xmlns:bd="clr-namespace:BenMann.Docusign;assembly=Docusign.Revamped"
+ xmlns:d="clr-namespace:Docusign;assembly=BenMann.Docusign.Activities"
+ xmlns:da="clr-namespace:Docusign.Authentication;assembly=BenMann.Docusign.Activities"
+ xmlns:dd="clr-namespace:Docusign.DocusignTypes;assembly=Docusign.Revamped"
+ xmlns:dd1="clr-namespace:Docusign.Documents;assembly=BenMann.Docusign.Activities"
+ xmlns:de="clr-namespace:Docusign.Envelopes;assembly=BenMann.Docusign.Activities"
+ xmlns:dr="clr-namespace:Docusign.Recipients;assembly=BenMann.Docusign.Activities"
+ xmlns:dtd="clr-namespace:Docusign.Tabs.Display;assembly=BenMann.Docusign.Activities"
+ xmlns:dtg="clr-namespace:Docusign.Tabs.GUI;assembly=BenMann.Docusign.Activities"
+ xmlns:dti="clr-namespace:Docusign.Tabs.Input;assembly=BenMann.Docusign.Activities"
+ xmlns:dts="clr-namespace:Docusign.Tabs.Signing;assembly=BenMann.Docusign.Activities"
+ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities"
+ xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
+ xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
+ xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
+ xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+ xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
+ xmlns:sd="clr-namespace:System.Data;assembly=System.Data"
+ xmlns:ss="clr-namespace:System.Security;assembly=mscorlib"
+ xmlns:ui="http://schemas.uipath.com/workflow/activities"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>Docusign.DocusignTypes</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>UiPath.Core</AssemblyReference>
+      <AssemblyReference>UiPath.Core.Activities</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>Docusign.Revamped</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence sap2010:WorkflowViewState.IdRef="Sequence_4">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="ss:SecureString" Name="clientSecret" />
+      <Variable x:TypeArguments="x:String" Name="clientID" />
+      <Variable x:TypeArguments="ui:GenericValue" Name="redirectURL" />
+    </Sequence.Variables>
+    <ui:GetRobotCredential TimeoutMS="{x:Null}" AssetName="DocusignAPI" DisplayName="Get Credential" sap2010:WorkflowViewState.IdRef="GetRobotCredential_1" Password="[clientSecret]" Username="[clientID]" />
+    <ui:GetRobotAsset TimeoutMS="{x:Null}" AssetName="RedirectURL" DisplayName="Get Asset" sap2010:WorkflowViewState.IdRef="GetRobotAsset_1">
+      <ui:GetRobotAsset.Value>
+        <OutArgument x:TypeArguments="ui:GenericValue">[redirectURL]</OutArgument>
+      </ui:GetRobotAsset.Value>
+    </ui:GetRobotAsset>
+    <d:DocusignApplicationScope ClientSecretInsecure="{x:Null}" ClientId="[clientID]" ClientSecretSecure="[clientSecret]" DisplayName="DocuSign Application Scope" sap2010:WorkflowViewState.IdRef="DocusignApplicationScope_1" RedirectUrl="[redirectURL]" RestApiUrl="https://account-d.docusign.com/" TimeoutMS="10000">
+      <d:DocusignApplicationScope.AuthBody>
+        <ActivityAction x:TypeArguments="bd:AuthenticationAgent">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="bd:AuthenticationAgent" Name="authAgent" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Authentication" sap2010:WorkflowViewState.IdRef="Sequence_1">
+            <Sequence.Variables>
+              <Variable x:TypeArguments="ss:SecureString" Name="password" />
+              <Variable x:TypeArguments="x:String" Name="email" />
+            </Sequence.Variables>
+            <ui:GetRobotCredential TimeoutMS="{x:Null}" AssetName="DocusignAuth" DisplayName="Get Credential" sap2010:WorkflowViewState.IdRef="GetRobotCredential_2" Password="[password]" Username="[email]" />
+            <da:Authenticate AuthenticationUrl="{x:Null}" BrowserLoadTimeout="{x:Null}" PasswordInsecure="{x:Null}" AuthenticationBrowser="IE" AuthenticationMethod="Secure" Email="[email]" sap2010:WorkflowViewState.IdRef="Authenticate_1" PasswordSecure="[password]">
+              <da:Authenticate.MahNames>
+                <scg:List x:TypeArguments="x:String" Capacity="4">
+                  <x:String>Relative Position</x:String>
+                  <x:String>Absolute Position</x:String>
+                </scg:List>
+              </da:Authenticate.MahNames>
+            </da:Authenticate>
+          </Sequence>
+        </ActivityAction>
+      </d:DocusignApplicationScope.AuthBody>
+      <d:DocusignApplicationScope.MainBody>
+        <ActivityAction x:TypeArguments="bd:AuthenticationAgent">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="bd:AuthenticationAgent" Name="authAgent" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Docusign Activities" sap2010:WorkflowViewState.IdRef="Sequence_2">
+            <Sequence.Variables>
+              <Variable x:TypeArguments="dd:Envelope" Name="Envelope" />
+              <Variable x:TypeArguments="dd:Document" Name="Document" />
+              <Variable x:TypeArguments="sd:DataTable" Name="Proposals" />
+              <Variable x:TypeArguments="x:String" Default="ben.mann108@gmail.com" Name="EvaluationTeamEmail" />
+              <Variable x:TypeArguments="x:String" Default="ben.mann108@gmail.com" Name="LegalTeamEmail" />
+              <Variable x:TypeArguments="x:String" Default="ben.mann108@gmail.com" Name="HealthSafetyEmail" />
+              <Variable x:TypeArguments="x:String" Default="ben.mann108@gmail.com" Name="FinanceTeamEmail" />
+              <Variable x:TypeArguments="x:String" Default="ben.mann108@gmail.com" Name="ResourceAllocEmail" />
+            </Sequence.Variables>
+            <ui:ReadCsvFile Encoding="{x:Null}" DataTable="[Proposals]" Delimitator="Comma" DisplayName="Read CSV" FilePath="ProductDevelopment.csv" sap2010:WorkflowViewState.IdRef="ReadCsvFile_1" />
+            <ui:ForEachRow DataTable="[Proposals]" DisplayName="For each row" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
+              <ui:ForEachRow.Body>
+                <ActivityAction x:TypeArguments="sd:DataRow">
+                  <ActivityAction.Argument>
+                    <DelegateInArgument x:TypeArguments="sd:DataRow" Name="row" />
+                  </ActivityAction.Argument>
+                  <Sequence sap2010:WorkflowViewState.IdRef="Sequence_22">
+                    <Sequence.Variables>
+                      <Variable x:TypeArguments="ui:GenericValue" Name="ProposerName" />
+                      <Variable x:TypeArguments="ui:GenericValue" Name="ProposerEmail" />
+                      <Variable x:TypeArguments="ui:GenericValue" Name="ProposalName" />
+                      <Variable x:TypeArguments="ui:GenericValue" Name="ProposerReview" />
+                      <Variable x:TypeArguments="ui:GenericValue" Name="EvaluationTeam" />
+                      <Variable x:TypeArguments="ui:GenericValue" Name="EvaluationTeamEmail" />
+                      <Variable x:TypeArguments="ui:GenericValue" Name="DevCost" />
+                      <Variable x:TypeArguments="ui:GenericValue" Name="Returns" />
+                      <Variable x:TypeArguments="x:String" Name="EnvelopeID" />
+                      <Variable x:TypeArguments="sd:DataTable" Name="dtNewEnvelope" />
+                    </Sequence.Variables>
+                    <ui:GetRowItem Column="{x:Null}" ColumnIndex="{x:Null}" ColumnName="Proposal Name" DisplayName="Get Proposal Name" sap2010:WorkflowViewState.IdRef="GetRowItem_3" Row="[row]">
+                      <ui:GetRowItem.Value>
+                        <OutArgument x:TypeArguments="ui:GenericValue">[ProposalName]</OutArgument>
+                      </ui:GetRowItem.Value>
+                    </ui:GetRowItem>
+                    <ui:GetRowItem Column="{x:Null}" ColumnIndex="{x:Null}" ColumnName="Proposer" DisplayName="Get Proposer Name" sap2010:WorkflowViewState.IdRef="GetRowItem_1" Row="[row]">
+                      <ui:GetRowItem.Value>
+                        <OutArgument x:TypeArguments="ui:GenericValue">[ProposerName]</OutArgument>
+                      </ui:GetRowItem.Value>
+                    </ui:GetRowItem>
+                    <ui:GetRowItem Column="{x:Null}" ColumnIndex="{x:Null}" ColumnName="Email" DisplayName="Get Proposer Email" sap2010:WorkflowViewState.IdRef="GetRowItem_2" Row="[row]">
+                      <ui:GetRowItem.Value>
+                        <OutArgument x:TypeArguments="ui:GenericValue">[ProposerEmail]</OutArgument>
+                      </ui:GetRowItem.Value>
+                    </ui:GetRowItem>
+                    <ui:GetRowItem Column="{x:Null}" ColumnIndex="{x:Null}" ColumnName="Proposer Review" DisplayName="Get Proposer Review" sap2010:WorkflowViewState.IdRef="GetRowItem_5" Row="[row]">
+                      <ui:GetRowItem.Value>
+                        <OutArgument x:TypeArguments="ui:GenericValue">[ProposerReview]</OutArgument>
+                      </ui:GetRowItem.Value>
+                    </ui:GetRowItem>
+                    <ui:GetRowItem Column="{x:Null}" ColumnIndex="{x:Null}" ColumnName="Evaluation Team" DisplayName="Get Evaluation Team" sap2010:WorkflowViewState.IdRef="GetRowItem_6" Row="[row]">
+                      <ui:GetRowItem.Value>
+                        <OutArgument x:TypeArguments="ui:GenericValue">[EvaluationTeam]</OutArgument>
+                      </ui:GetRowItem.Value>
+                    </ui:GetRowItem>
+                    <ui:GetRowItem Column="{x:Null}" ColumnIndex="{x:Null}" ColumnName="Evaluation Team Email" DisplayName="Get Evaluation Team Email" sap2010:WorkflowViewState.IdRef="GetRowItem_7" Row="[row]">
+                      <ui:GetRowItem.Value>
+                        <OutArgument x:TypeArguments="ui:GenericValue">[EvaluationTeamEmail]</OutArgument>
+                      </ui:GetRowItem.Value>
+                    </ui:GetRowItem>
+                    <ui:GetRowItem Column="{x:Null}" ColumnIndex="{x:Null}" ColumnName="Dev Cost" DisplayName="Get Dev Cost" sap2010:WorkflowViewState.IdRef="GetRowItem_8" Row="[row]">
+                      <ui:GetRowItem.Value>
+                        <OutArgument x:TypeArguments="ui:GenericValue">[DevCost]</OutArgument>
+                      </ui:GetRowItem.Value>
+                    </ui:GetRowItem>
+                    <ui:GetRowItem Column="{x:Null}" ColumnIndex="{x:Null}" ColumnName="Returns" DisplayName="Get Returns" sap2010:WorkflowViewState.IdRef="GetRowItem_9" Row="[row]">
+                      <ui:GetRowItem.Value>
+                        <OutArgument x:TypeArguments="ui:GenericValue">[Returns]</OutArgument>
+                      </ui:GetRowItem.Value>
+                    </ui:GetRowItem>
+                    <de:CreateEnvelope DisplayName="Create envelope" Envelope="[Envelope]" sap2010:WorkflowViewState.IdRef="CreateEnvelope_1" Subject="[&quot;Proposal: &quot;  + ProposalName]" />
+                    <dd1:AttachDocument DisplayName="Attach document" Document="[Document]" Envelope="[Envelope]" Filename="ProductDevelopment.pdf" sap2010:WorkflowViewState.IdRef="AttachDocument_1" Name="Product Development Proposal" />
+                    <Flowchart DisplayName="Flowchart - Add recipients" sap2010:WorkflowViewState.IdRef="Flowchart_1">
+                      <Flowchart.StartNode>
+                        <FlowStep x:Name="__ReferenceID0" sap2010:WorkflowViewState.IdRef="FlowStep_1">
+                          <Sequence DisplayName="Add Proposer" sap2010:WorkflowViewState.IdRef="Sequence_12">
+                            <Sequence.Variables>
+                              <Variable x:TypeArguments="dd:Recipient" Name="Proposer" />
+                            </Sequence.Variables>
+                            <dr:AddSigner DisplayName="Add Signer - Proposer" Email="[ProposerEmail]" Envelope="[Envelope]" sap2010:WorkflowViewState.IdRef="AddSigner_8" Name="[ProposerName]" Recipient="[Proposer]" RoutingOrder="1" />
+                            <dtd:AddTextDisplayTab Height="{x:Null}" TabLabel="{x:Null}" ToolTip="{x:Null}" Width="{x:Null}" AnchorText="Proposal Name:" Bold="False" DisplayName="Text - Proposal Name" Document="[Document]" Font="Default" FontColor="Black" FontSize="8" sap2010:WorkflowViewState.IdRef="AddTextDisplayTab_3" Italic="True" PageNumber="1" Shared="False" Signer="[Proposer]" Underline="False" Value="[ProposalName]" OffsetX="110" OffsetY="-17" />
+                            <dtd:AddFullNameTab TabLabel="{x:Null}" ToolTip="{x:Null}" AnchorText="By:" Bold="False" DisplayName="Add Full Name Tab" Document="[Document]" Font="Default" FontColor="Black" FontSize="8" sap2010:WorkflowViewState.IdRef="AddFullNameTab_2" Italic="False" PageNumber="1" Signer="[Proposer]" Underline="False" OffsetX="60" OffsetY="-12" />
+                            <dtd:AddEmailAddressTab FontSize="{x:Null}" TabLabel="{x:Null}" ToolTip="{x:Null}" AnchorText="By:" Bold="False" DisplayName="Add Email Address Tab" Document="[Document]" Font="Default" FontColor="Black" sap2010:WorkflowViewState.IdRef="AddEmailAddressTab_2" Italic="False" PageNumber="1" Signer="[Proposer]" Underline="False" OffsetX="430" OffsetY="-5" />
+                            <dti:AddSignerAttachmentTab ScaleValue="{x:Null}" TabLabel="{x:Null}" ToolTip="{x:Null}" AnchorText="Proposal Document:" DisplayName="Add Signer Attachment Tab" Document="[Document]" sap2010:WorkflowViewState.IdRef="AddSignerAttachmentTab_2" PageNumber="1" Required="True" Signer="[Proposer]" OffsetX="150" OffsetY="-20" />
+                            <dti:AddNumberTab FontSize="{x:Null}" ToolTip="{x:Null}" Width="{x:Null}" AnchorText="Product Development Cost:" Bold="False" DisplayName="Number - Dev Cost" Document="[Document]" Font="Default" FontColor="Black" sap2010:WorkflowViewState.IdRef="AddNumberTab_5" Italic="False" PageNumber="1" Required="True" Shared="False" Signer="[Proposer]" TabLabel="lbl_DevCost" Underline="False" Value="[Integer.Parse(DevCost)]" OffsetX="240" OffsetY="-5" />
+                            <dti:AddNumberTab FontSize="{x:Null}" ToolTip="{x:Null}" Width="{x:Null}" AnchorText="Estimated Returns:" Bold="False" DisplayName="Number - Est. Rtns" Document="[Document]" Font="Default" FontColor="Black" sap2010:WorkflowViewState.IdRef="AddNumberTab_6" Italic="False" PageNumber="1" Required="True" Shared="False" Signer="[Proposer]" TabLabel="lbl_Returns" Underline="False" Value="[Integer.Parse(Returns)]" OffsetX="240" OffsetY="-5" />
+                            <dts:AddSignHereTab ScaleValue="{x:Null}" TabLabel="{x:Null}" ToolTip="{x:Null}" AnchorText="Estimated Returns:" DisplayName="Add Sign Here Tab" Document="[Document]" sap2010:WorkflowViewState.IdRef="AddSignHereTab_7" PageNumber="1" Required="True" Signer="[Proposer]" OffsetX="50" OffsetY="75" />
+                            <dtd:AddDateSignedTab FontSize="{x:Null}" TabLabel="{x:Null}" ToolTip="{x:Null}" Value="{x:Null}" Width="{x:Null}" AnchorText="Estimated Returns:" Bold="False" DisplayName="Add Date Signed Tab" Document="[Document]" Font="Default" FontColor="Black" sap2010:WorkflowViewState.IdRef="AddDateSignedTab_7" Italic="False" PageNumber="1" Signer="[Proposer]" Underline="False" OffsetX="350" OffsetY="50" />
+                          </Sequence>
+                          <FlowStep.Next>
+                            <FlowStep x:Name="__ReferenceID1" sap2010:WorkflowViewState.IdRef="FlowStep_2">
+                              <Sequence DisplayName="Add Evaluator" sap2010:WorkflowViewState.IdRef="Sequence_13">
+                                <Sequence.Variables>
+                                  <Variable x:TypeArguments="dd:Recipient" Name="Evaluator" />
+                                </Sequence.Variables>
+                                <dr:AddSigner DisplayName="Add Signer - Evaluation" Email="[EvaluationTeamEmail]" Envelope="[Envelope]" sap2010:WorkflowViewState.IdRef="AddSigner_9" Name="[EvaluationTeam]" Recipient="[Evaluator]" RoutingOrder="2" />
+                                <If Condition="[Integer.Parse(DevCost) &lt; 7000]" sap2010:WorkflowViewState.IdRef="If_3">
+                                  <If.Then>
+                                    <dtd:AddTextDisplayTab TabLabel="{x:Null}" ToolTip="{x:Null}" AnchorText="Product Evaluation" Bold="False" DisplayName="Add Text Tab" Document="[Document]" Font="Default" FontColor="Black" FontSize="12" Height="50" sap2010:WorkflowViewState.IdRef="AddTextDisplayTab_4" Italic="False" PageNumber="1" Shared="False" Signer="[Evaluator]" Underline="False" Value="NO ADDITIONAL FUNDING REQUIRED" Width="300" OffsetX="30" OffsetY="20" />
+                                  </If.Then>
+                                  <If.Else>
+                                    <dtg:AddRadioGroupTab FontSize="{x:Null}" TabLabel="{x:Null}" ToolTip="{x:Null}" Value="{x:Null}" Width="{x:Null}" AnchorText="Product Evaluation" Bold="False" DisplayName="Add Radio Group Tab" Document="[Document]" Font="Default" FontColor="Black" sap2010:WorkflowViewState.IdRef="AddRadioGroupTab_2" Italic="False" PageNumber="1" RadioItems="Infrastructure,Internal,B2B" RadioSpacing="20" Required="True" Shared="False" Signer="[Evaluator]" Underline="False" OffsetX="30" OffsetY="30" />
+                                  </If.Else>
+                                </If>
+                                <dtg:AddListTab FontSize="{x:Null}" TabLabel="{x:Null}" ToolTip="{x:Null}" AnchorText="Product Viability" Bold="False" DisplayName="Add List Tab" Document="[Document]" Font="Default" FontColor="Black" sap2010:WorkflowViewState.IdRef="AddListTab_2" Italic="False" ListItems="Low, Medium, High`" PageNumber="1" Required="True" Shared="False" Signer="[Evaluator]" Underline="False" OffsetX="120" OffsetY="0" />
+                                <dtd:AddTextDisplayTab FontSize="{x:Null}" Height="{x:Null}" TabLabel="{x:Null}" ToolTip="{x:Null}" Width="{x:Null}" AnchorText="Team" Bold="False" DisplayName="Add Text Tab" Document="[Document]" Font="Default" FontColor="Black" sap2010:WorkflowViewState.IdRef="AddTextDisplayTab_5" Italic="False" PageNumber="1" Shared="False" Signer="[Evaluator]" Underline="False" Value="[EvaluationTeam]" OffsetX="100" OffsetY="-5" />
+                                <dts:AddSignHereTab ScaleValue="{x:Null}" TabLabel="{x:Null}" ToolTip="{x:Null}" AnchorText="Team" DisplayName="Add Sign Here Tab" Document="[Document]" sap2010:WorkflowViewState.IdRef="AddSignHereTab_8" PageNumber="1" Required="True" Signer="[Evaluator]" OffsetX="120" OffsetY="-20" />
+                                <dtd:AddDateSignedTab FontSize="{x:Null}" TabLabel="{x:Null}" ToolTip="{x:Null}" Value="{x:Null}" Width="{x:Null}" AnchorText="Team" Bold="False" DisplayName="Add Date Signed Tab" Document="[Document]" Font="Default" FontColor="Black" sap2010:WorkflowViewState.IdRef="AddDateSignedTab_8" Italic="False" PageNumber="1" Signer="[Evaluator]" Underline="False" OffsetX="370" OffsetY="-25" />
+                              </Sequence>
+                              <FlowStep.Next>
+                                <FlowStep x:Name="__ReferenceID2" sap2010:WorkflowViewState.IdRef="FlowStep_3">
+                                  <Sequence DisplayName="Add Finance" sap2010:WorkflowViewState.IdRef="Sequence_14">
+                                    <Sequence.Variables>
+                                      <Variable x:TypeArguments="dd:Recipient" Name="Finance" />
+                                    </Sequence.Variables>
+                                    <dr:AddSigner DisplayName="Add Signer - Finance" Email="[FinanceTeamEmail]" Envelope="[Envelope]" sap2010:WorkflowViewState.IdRef="AddSigner_10" Name="Finance" Recipient="[Finance]" RoutingOrder="3" />
+                                    <dtg:AddFormulaTab FontSize="{x:Null}" TabLabel="{x:Null}" ToolTip="{x:Null}" Value="{x:Null}" Width="{x:Null}" AnchorText="Marketing Cost" Bold="False" DisplayName="Add Formula Tab" Document="[Document]" Font="Default" FontColor="Black" Formula="[DevCost]" sap2010:WorkflowViewState.IdRef="AddFormulaTab_3" Italic="False" PageNumber="1" Shared="False" Signer="[Finance]" Underline="False" OffsetX="-100" OffsetY="20" />
+                                    <dti:AddNumberTab FontSize="{x:Null}" ToolTip="{x:Null}" Value="{x:Null}" Width="{x:Null}" AnchorText="Marketing Cost" Bold="False" DisplayName="Add Number Tab" Document="[Document]" Font="Default" FontColor="Black" sap2010:WorkflowViewState.IdRef="AddNumberTab_7" Italic="False" PageNumber="1" Required="True" Shared="False" Signer="[Finance]" TabLabel="lbl_MkCost" Underline="False" OffsetX="-10" OffsetY="25" />
+                                    <dti:AddNumberTab FontSize="{x:Null}" ToolTip="{x:Null}" Value="{x:Null}" Width="{x:Null}" AnchorText="Distribution Cost" Bold="False" DisplayName="Add Number Tab" Document="[Document]" Font="Default" FontColor="Black" sap2010:WorkflowViewState.IdRef="AddNumberTab_8" Italic="False" PageNumber="1" Required="True" Shared="False" Signer="[Finance]" TabLabel="lbl_DistCost" Underline="False" OffsetX="-10" OffsetY="25" />
+                                    <dtg:AddFormulaTab FontSize="{x:Null}" TabLabel="{x:Null}" ToolTip="{x:Null}" Value="{x:Null}" Width="{x:Null}" AnchorText="Total Cost" Bold="False" DisplayName="Add Formula Tab" Document="[Document]" Font="Default" FontColor="Black" Formula="[DevCost+&quot;+[lbl_MkCost]+[lbl_DistCost]&quot;]" sap2010:WorkflowViewState.IdRef="AddFormulaTab_4" Italic="False" PageNumber="1" Shared="False" Signer="[Finance]" Underline="False" OffsetX="0" OffsetY="30" />
+                                    <dtd:AddDateSignedTab FontSize="{x:Null}" TabLabel="{x:Null}" ToolTip="{x:Null}" Value="{x:Null}" Width="{x:Null}" AnchorText="Total Cost" Bold="False" DisplayName="Add Date Signed Tab" Document="[Document]" Font="Default" FontColor="Black" sap2010:WorkflowViewState.IdRef="AddDateSignedTab_9" Italic="False" PageNumber="1" Signer="[Finance]" Underline="False" OffsetX="-100" OffsetY="95" />
+                                    <dts:AddSignHereTab ScaleValue="{x:Null}" TabLabel="{x:Null}" ToolTip="{x:Null}" AnchorText="Marketing Cost" DisplayName="Add Sign Here Tab" Document="[Document]" sap2010:WorkflowViewState.IdRef="AddSignHereTab_9" PageNumber="1" Required="True" Signer="[Finance]" OffsetX="-100" OffsetY="110" />
+                                  </Sequence>
+                                  <FlowStep.Next>
+                                    <FlowStep x:Name="__ReferenceID3" sap2010:WorkflowViewState.IdRef="FlowStep_4">
+                                      <Sequence DisplayName="Add Legal" sap2010:WorkflowViewState.IdRef="Sequence_15">
+                                        <Sequence.Variables>
+                                          <Variable x:TypeArguments="dd:Recipient" Name="Legal" />
+                                        </Sequence.Variables>
+                                        <dr:AddSigner DisplayName="Add Signer - Legal" Email="[LegalTeamEmail]" Envelope="[Envelope]" sap2010:WorkflowViewState.IdRef="AddSigner_11" Name="Legal" Recipient="[Legal]" RoutingOrder="4" />
+                                        <dts:AddSignHereTab ScaleValue="{x:Null}" TabLabel="{x:Null}" ToolTip="{x:Null}" AnchorText="Legal" DisplayName="Add Sign Here Tab" Document="[Document]" sap2010:WorkflowViewState.IdRef="AddSignHereTab_10" PageNumber="1" Required="True" Signer="[Legal]" OffsetX="0" OffsetY="90" />
+                                      </Sequence>
+                                      <FlowStep.Next>
+                                        <FlowStep x:Name="__ReferenceID4" sap2010:WorkflowViewState.IdRef="FlowStep_5">
+                                          <Sequence DisplayName="Add H&amp;S" sap2010:WorkflowViewState.IdRef="Sequence_16">
+                                            <Sequence.Variables>
+                                              <Variable x:TypeArguments="dd:Recipient" Name="HealthSafety" />
+                                            </Sequence.Variables>
+                                            <dr:AddSigner DisplayName="Add Signer H&amp;S" Email="[HealthSafetyEmail]" Envelope="[Envelope]" sap2010:WorkflowViewState.IdRef="AddSigner_12" Name="Health and Safety" Recipient="[HealthSafety]" RoutingOrder="4" />
+                                            <dti:AddTextInputTab FontSize="{x:Null}" Height="{x:Null}" TabLabel="{x:Null}" ToolTip="{x:Null}" Value="{x:Null}" Width="{x:Null}" AnchorText="Assessment ID" Bold="False" DisplayName="Add Text Tab" Document="[Document]" Font="Default" FontColor="Black" sap2010:WorkflowViewState.IdRef="AddTextInputTab_3" Italic="False" PageNumber="2" Required="False" Shared="False" Signer="[HealthSafety]" Underline="False" OffsetX="100" OffsetY="0" />
+                                            <dts:AddSignHereTab ScaleValue="{x:Null}" TabLabel="{x:Null}" ToolTip="{x:Null}" AnchorText="Health And Safety" DisplayName="Add Sign Here Tab" Document="[Document]" sap2010:WorkflowViewState.IdRef="AddSignHereTab_11" PageNumber="2" Required="True" Signer="[HealthSafety]" OffsetX="0" OffsetY="90" />
+                                          </Sequence>
+                                          <FlowStep.Next>
+                                            <FlowStep x:Name="__ReferenceID5" sap2010:WorkflowViewState.IdRef="FlowStep_6">
+                                              <Sequence DisplayName="Add Dev Review" sap2010:WorkflowViewState.IdRef="Sequence_18">
+                                                <If Condition="[ProposerReview.Length &gt; 0]" sap2010:WorkflowViewState.IdRef="If_4">
+                                                  <If.Then>
+                                                    <Sequence sap2010:WorkflowViewState.IdRef="Sequence_17">
+                                                      <Sequence.Variables>
+                                                        <Variable x:TypeArguments="dd:Recipient" Name="ProposerReview" />
+                                                      </Sequence.Variables>
+                                                      <dr:AddSigner DisplayName="Add Signer" Email="[ProposerEmail]" Envelope="[Envelope]" sap2010:WorkflowViewState.IdRef="AddSigner_13" Name="[ProposerName]" Recipient="[ProposerReview]" RoutingOrder="5" />
+                                                      <dti:AddTextInputTab FontSize="{x:Null}" TabLabel="{x:Null}" ToolTip="{x:Null}" Value="{x:Null}" AnchorText="Review By Proposer" Bold="False" DisplayName="Add Text Tab" Document="[Document]" Font="Default" FontColor="Black" Height="100" sap2010:WorkflowViewState.IdRef="AddTextInputTab_4" Italic="False" PageNumber="1" Required="False" Shared="False" Signer="[ProposerReview]" Underline="False" Width="400" OffsetX="0" OffsetY="50" />
+                                                    </Sequence>
+                                                  </If.Then>
+                                                </If>
+                                              </Sequence>
+                                              <FlowStep.Next>
+                                                <FlowStep x:Name="__ReferenceID6" sap2010:WorkflowViewState.IdRef="FlowStep_7">
+                                                  <Sequence DisplayName="Add Resource Allocation" sap2010:WorkflowViewState.IdRef="Sequence_19">
+                                                    <Sequence.Variables>
+                                                      <Variable x:TypeArguments="dd:Recipient" Name="Resource" />
+                                                    </Sequence.Variables>
+                                                    <dr:AddSigner DisplayName="Add Signer - Resources" Email="[ResourceAllocEmail]" Envelope="[Envelope]" sap2010:WorkflowViewState.IdRef="AddSigner_14" Name="Resource Allocations" Recipient="[Resource]" RoutingOrder="6" />
+                                                    <dts:AddDeclineTab ButtonText="{x:Null}" FontSize="{x:Null}" TabLabel="{x:Null}" ToolTip="{x:Null}" Width="{x:Null}" AnchorText="Final Sign-Off" Bold="False" DisplayName="Add Decline Tab" Document="[Document]" Font="Default" FontColor="Black" sap2010:WorkflowViewState.IdRef="AddDeclineTab_2" Italic="False" PageNumber="2" Signer="[Resource]" Underline="False" OffsetX="30" OffsetY="20" />
+                                                    <dts:AddInitialHereTab ScaleValue="{x:Null}" TabLabel="{x:Null}" ToolTip="{x:Null}" AnchorText="Initials" DisplayName="Add Initial Here Tab" Document="[Document]" sap2010:WorkflowViewState.IdRef="AddInitialHereTab_2" PageNumber="1" Required="True" Signer="[Resource]" OffsetX="70" OffsetY="0" />
+                                                    <dtd:AddDateSignedTab FontSize="{x:Null}" TabLabel="{x:Null}" ToolTip="{x:Null}" Value="{x:Null}" Width="{x:Null}" AnchorText="Initials" Bold="False" DisplayName="Add Date Signed Tab" Document="[Document]" Font="Default" FontColor="Black" sap2010:WorkflowViewState.IdRef="AddDateSignedTab_10" Italic="False" PageNumber="2" Signer="[Resource]" Underline="False" OffsetX="200" OffsetY="0" />
+                                                    <dti:AddTitleTab FontSize="{x:Null}" TabLabel="{x:Null}" ToolTip="{x:Null}" Value="{x:Null}" Width="{x:Null}" AnchorText="Title:" Bold="False" DisplayName="Add Title Tab" Document="[Document]" Font="Default" FontColor="Black" sap2010:WorkflowViewState.IdRef="AddTitleTab_4" Italic="False" PageNumber="2" Required="False" Signer="[Resource]" Underline="False" OffsetX="60" OffsetY="-10" />
+                                                    <dts:AddSignHereTab ScaleValue="{x:Null}" TabLabel="{x:Null}" ToolTip="{x:Null}" AnchorText="Title:" DisplayName="Add Sign Here Tab" Document="[Document]" sap2010:WorkflowViewState.IdRef="AddSignHereTab_12" PageNumber="2" Required="True" Signer="[Resource]" OffsetX="110" OffsetY="-40" />
+                                                  </Sequence>
+                                                </FlowStep>
+                                              </FlowStep.Next>
+                                            </FlowStep>
+                                          </FlowStep.Next>
+                                        </FlowStep>
+                                      </FlowStep.Next>
+                                    </FlowStep>
+                                  </FlowStep.Next>
+                                </FlowStep>
+                              </FlowStep.Next>
+                            </FlowStep>
+                          </FlowStep.Next>
+                        </FlowStep>
+                      </Flowchart.StartNode>
+                      <x:Reference>__ReferenceID0</x:Reference>
+                      <x:Reference>__ReferenceID1</x:Reference>
+                      <x:Reference>__ReferenceID2</x:Reference>
+                      <x:Reference>__ReferenceID3</x:Reference>
+                      <x:Reference>__ReferenceID4</x:Reference>
+                      <x:Reference>__ReferenceID5</x:Reference>
+                      <x:Reference>__ReferenceID6</x:Reference>
+                    </Flowchart>
+                    <de:SendEnvelope DisplayName="Send envelope" Envelope="[Envelope]" EnvelopeID="[EnvelopeID]" sap2010:WorkflowViewState.IdRef="SendEnvelope_1" />
+                    <ui:BuildDataTable DataTable="[dtNewEnvelope]" DisplayName="Build data table" sap2010:WorkflowViewState.IdRef="BuildDataTable_1" TableInfo="&lt;NewDataSet&gt;&#xA;  &lt;xs:schema id=&quot;NewDataSet&quot; xmlns=&quot;&quot; xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:msdata=&quot;urn:schemas-microsoft-com:xml-msdata&quot;&gt;&#xA;    &lt;xs:element name=&quot;NewDataSet&quot; msdata:IsDataSet=&quot;true&quot; msdata:MainDataTable=&quot;TableName&quot; msdata:UseCurrentLocale=&quot;true&quot;&gt;&#xA;      &lt;xs:complexType&gt;&#xA;        &lt;xs:choice minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot;&gt;&#xA;          &lt;xs:element name=&quot;TableName&quot;&gt;&#xA;            &lt;xs:complexType&gt;&#xA;              &lt;xs:sequence&gt;&#xA;                &lt;xs:element name=&quot;EnvelopeID&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Proposer&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;ProposerEmail&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Status&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;              &lt;/xs:sequence&gt;&#xA;            &lt;/xs:complexType&gt;&#xA;          &lt;/xs:element&gt;&#xA;        &lt;/xs:choice&gt;&#xA;      &lt;/xs:complexType&gt;&#xA;    &lt;/xs:element&gt;&#xA;  &lt;/xs:schema&gt;&#xA;  &lt;TableName /&gt;&#xA;&lt;/NewDataSet&gt;" />
+                    <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[new String() {EnvelopeID, ProposerName, ProposerEmail, &quot;Sent&quot;}]" DataTable="[dtNewEnvelope]" DisplayName="Add data row" sap2010:WorkflowViewState.IdRef="AddDataRow_1" />
+                    <ui:AppendCsvFile Encoding="{x:Null}" DataTable="[dtNewEnvelope]" Delimitator="Comma" DisplayName="Append To CSV" FilePath="SentEnvelopes.csv" sap2010:WorkflowViewState.IdRef="AppendCsvFile_1" />
+                  </Sequence>
+                </ActivityAction>
+              </ui:ForEachRow.Body>
+            </ui:ForEachRow>
+          </Sequence>
+        </ActivityAction>
+      </d:DocusignApplicationScope.MainBody>
+    </d:DocusignApplicationScope>
+    <sads:DebugSymbol.Symbol>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AuQCAgErnAKkA5wCqAMCASqcAv0CnAKJAwIBKJwCrgGcArYBAgEnnQLDAZ0CzwECASSdAs0CnQLSAgIBI50CjwKdApICAgEinQK/Ap0CxAICASGdAqoCnQK2AgIBH50CkQGdApkBAgEe1wGMA9cBrAMDAZ0C1wG0AdcBwAEDAZsC1wH3AdcB+wEDAZoC1wHrAdcB7wEDAZkC1wHOA9cB0gMDAZgC1wHMAtcBzwIDAZcC1wHBA9cBxQMDAZYC1wHmAtcB8wIDAZQC1wFu1wGCAQMBkwLXAbMD1wG4AwMBkgLaAfAB2gH8AQMBjwLaAacD2gGrAwMBjgLaAYcE2gGLBAMBjQLaAe0C2gHwAgMBjALaAfoD2gH+AwMBiwLaAdID2gHfAwMBiQLaAaMB2gG3AQMBiALaAfwC2gGZAwMBhwKMAjeMAoECAgFijQI3jQLpAwIBV4wCZIwCdQIBaYwC+wGMAv4BAgFojALbAYwC7QECAWaMAn+MAosBAgFkjALAAYwC0AECAWONAukBjQL1AQIBYI0CngKNAqMCAgFfjQLiA40C5gMCAV6NAvICjQL1AgIBXY0C1gONAtkDAgFcjQKdA40CrwMCAVqNAqMBjQK3AQIBWY0CyAONAs0DAgFY</sads:DebugSymbol.Symbol>
+  </Sequence>
+  <sap2010:WorkflowViewState.ViewStateManager>
+    <sap2010:ViewStateManager>
+      <sap2010:ViewStateData Id="GetRobotCredential_1" sap:VirtualizedContainerService.HintSize="416,22.4" />
+      <sap2010:ViewStateData Id="GetRobotAsset_1" sap:VirtualizedContainerService.HintSize="416,22.4" />
+      <sap2010:ViewStateData Id="GetRobotCredential_2" sap:VirtualizedContainerService.HintSize="284.8,22.4" />
+      <sap2010:ViewStateData Id="Authenticate_1" sap:VirtualizedContainerService.HintSize="284.8,168" />
+      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="307.2,355.2">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ReadCsvFile_1" sap:VirtualizedContainerService.HintSize="366.4,59.2" />
+      <sap2010:ViewStateData Id="GetRowItem_3" sap:VirtualizedContainerService.HintSize="313.6,64" />
+      <sap2010:ViewStateData Id="GetRowItem_1" sap:VirtualizedContainerService.HintSize="313.6,64" />
+      <sap2010:ViewStateData Id="GetRowItem_2" sap:VirtualizedContainerService.HintSize="313.6,64" />
+      <sap2010:ViewStateData Id="GetRowItem_5" sap:VirtualizedContainerService.HintSize="313.6,64" />
+      <sap2010:ViewStateData Id="GetRowItem_6" sap:VirtualizedContainerService.HintSize="313.6,64" />
+      <sap2010:ViewStateData Id="GetRowItem_7" sap:VirtualizedContainerService.HintSize="313.6,64" />
+      <sap2010:ViewStateData Id="GetRowItem_8" sap:VirtualizedContainerService.HintSize="313.6,64" />
+      <sap2010:ViewStateData Id="GetRowItem_9" sap:VirtualizedContainerService.HintSize="313.6,64" />
+      <sap2010:ViewStateData Id="CreateEnvelope_1" sap:VirtualizedContainerService.HintSize="313.6,22.4" />
+      <sap2010:ViewStateData Id="AttachDocument_1" sap:VirtualizedContainerService.HintSize="313.6,70.4" />
+      <sap2010:ViewStateData Id="AddSigner_8" sap:VirtualizedContainerService.HintSize="200,22.4" />
+      <sap2010:ViewStateData Id="AddTextDisplayTab_3" sap:VirtualizedContainerService.HintSize="200,22.4" />
+      <sap2010:ViewStateData Id="AddFullNameTab_2" sap:VirtualizedContainerService.HintSize="200,22.4" />
+      <sap2010:ViewStateData Id="AddEmailAddressTab_2" sap:VirtualizedContainerService.HintSize="200,22.4" />
+      <sap2010:ViewStateData Id="AddSignerAttachmentTab_2" sap:VirtualizedContainerService.HintSize="200,22.4" />
+      <sap2010:ViewStateData Id="AddNumberTab_5" sap:VirtualizedContainerService.HintSize="200,22.4" />
+      <sap2010:ViewStateData Id="AddNumberTab_6" sap:VirtualizedContainerService.HintSize="200,22.4" />
+      <sap2010:ViewStateData Id="AddSignHereTab_7" sap:VirtualizedContainerService.HintSize="200,22.4" />
+      <sap2010:ViewStateData Id="AddDateSignedTab_7" sap:VirtualizedContainerService.HintSize="200,22.4" />
+      <sap2010:ViewStateData Id="Sequence_12" sap:VirtualizedContainerService.HintSize="200,52.8">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="AddSigner_9" sap:VirtualizedContainerService.HintSize="464,22.4" />
+      <sap2010:ViewStateData Id="AddTextDisplayTab_4" sap:VirtualizedContainerService.HintSize="200,22.4" />
+      <sap2010:ViewStateData Id="AddRadioGroupTab_2" sap:VirtualizedContainerService.HintSize="200,22.4" />
+      <sap2010:ViewStateData Id="If_3" sap:VirtualizedContainerService.HintSize="464,211.2" />
+      <sap2010:ViewStateData Id="AddListTab_2" sap:VirtualizedContainerService.HintSize="464,22.4" />
+      <sap2010:ViewStateData Id="AddTextDisplayTab_5" sap:VirtualizedContainerService.HintSize="464,22.4" />
+      <sap2010:ViewStateData Id="AddSignHereTab_8" sap:VirtualizedContainerService.HintSize="464,22.4" />
+      <sap2010:ViewStateData Id="AddDateSignedTab_8" sap:VirtualizedContainerService.HintSize="464,22.4" />
+      <sap2010:ViewStateData Id="Sequence_13" sap:VirtualizedContainerService.HintSize="200,52.8">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="AddSigner_10" sap:VirtualizedContainerService.HintSize="200,22.4" />
+      <sap2010:ViewStateData Id="AddFormulaTab_3" sap:VirtualizedContainerService.HintSize="200,22.4" />
+      <sap2010:ViewStateData Id="AddNumberTab_7" sap:VirtualizedContainerService.HintSize="200,22.4" />
+      <sap2010:ViewStateData Id="AddNumberTab_8" sap:VirtualizedContainerService.HintSize="200,22.4" />
+      <sap2010:ViewStateData Id="AddFormulaTab_4" sap:VirtualizedContainerService.HintSize="200,22.4" />
+      <sap2010:ViewStateData Id="AddDateSignedTab_9" sap:VirtualizedContainerService.HintSize="200,22.4" />
+      <sap2010:ViewStateData Id="AddSignHereTab_9" sap:VirtualizedContainerService.HintSize="200,22.4" />
+      <sap2010:ViewStateData Id="Sequence_14" sap:VirtualizedContainerService.HintSize="200,52.8">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="AddSigner_11" sap:VirtualizedContainerService.HintSize="200,22.4" />
+      <sap2010:ViewStateData Id="AddSignHereTab_10" sap:VirtualizedContainerService.HintSize="200,22.4" />
+      <sap2010:ViewStateData Id="Sequence_15" sap:VirtualizedContainerService.HintSize="200,52.8">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="AddSigner_12" sap:VirtualizedContainerService.HintSize="200,22.4" />
+      <sap2010:ViewStateData Id="AddTextInputTab_3" sap:VirtualizedContainerService.HintSize="200,22.4" />
+      <sap2010:ViewStateData Id="AddSignHereTab_11" sap:VirtualizedContainerService.HintSize="200,22.4" />
+      <sap2010:ViewStateData Id="Sequence_16" sap:VirtualizedContainerService.HintSize="200,52.8">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="AddSigner_13" sap:VirtualizedContainerService.HintSize="200,22.4" />
+      <sap2010:ViewStateData Id="AddTextInputTab_4" sap:VirtualizedContainerService.HintSize="200,22.4" />
+      <sap2010:ViewStateData Id="Sequence_17" sap:VirtualizedContainerService.HintSize="222.4,209.6">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="If_4" sap:VirtualizedContainerService.HintSize="464,360" />
+      <sap2010:ViewStateData Id="Sequence_18" sap:VirtualizedContainerService.HintSize="200,52.8">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="AddSigner_14" sap:VirtualizedContainerService.HintSize="200,22.4" />
+      <sap2010:ViewStateData Id="AddDeclineTab_2" sap:VirtualizedContainerService.HintSize="200,22.4" />
+      <sap2010:ViewStateData Id="AddInitialHereTab_2" sap:VirtualizedContainerService.HintSize="200,22.4" />
+      <sap2010:ViewStateData Id="AddDateSignedTab_10" sap:VirtualizedContainerService.HintSize="200,22.4" />
+      <sap2010:ViewStateData Id="AddTitleTab_4" sap:VirtualizedContainerService.HintSize="200,22.4" />
+      <sap2010:ViewStateData Id="AddSignHereTab_12" sap:VirtualizedContainerService.HintSize="200,22.4" />
+      <sap2010:ViewStateData Id="Sequence_19" sap:VirtualizedContainerService.HintSize="222.4,459.2">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="FlowStep_7">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <av:Point x:Key="ShapeLocation">0,273.6</av:Point>
+            <av:Size x:Key="ShapeSize">200,52.8</av:Size>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="FlowStep_6">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <av:Point x:Key="ShapeLocation">210,323.6</av:Point>
+            <av:Size x:Key="ShapeSize">200,52.8</av:Size>
+            <av:PointCollection x:Key="ConnectorLocation">210,350 100,350 100,326.4</av:PointCollection>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="FlowStep_5">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <av:Point x:Key="ShapeLocation">440,323.6</av:Point>
+            <av:Size x:Key="ShapeSize">200,52.8</av:Size>
+            <av:PointCollection x:Key="ConnectorLocation">440,350 410,350</av:PointCollection>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="FlowStep_4">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <av:Point x:Key="ShapeLocation">440,253.6</av:Point>
+            <av:Size x:Key="ShapeSize">200,52.8</av:Size>
+            <av:PointCollection x:Key="ConnectorLocation">540,306.4 540,323.6</av:PointCollection>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="FlowStep_3">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <av:Point x:Key="ShapeLocation">440,103.6</av:Point>
+            <av:Size x:Key="ShapeSize">200,52.8</av:Size>
+            <av:PointCollection x:Key="ConnectorLocation">540,156.4 540,253.6</av:PointCollection>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="FlowStep_2">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <av:Point x:Key="ShapeLocation">220,103.6</av:Point>
+            <av:Size x:Key="ShapeSize">200,52.8</av:Size>
+            <av:PointCollection x:Key="ConnectorLocation">420,130 440,130</av:PointCollection>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="FlowStep_1">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <av:Point x:Key="ShapeLocation">0,103.6</av:Point>
+            <av:Size x:Key="ShapeSize">200,52.8</av:Size>
+            <av:PointCollection x:Key="ConnectorLocation">200,130 220,130</av:PointCollection>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Flowchart_1" sap:VirtualizedContainerService.HintSize="313.6,52.8">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <av:Point x:Key="ShapeLocation">70,2.4</av:Point>
+            <av:Size x:Key="ShapeSize">60,75.2</av:Size>
+            <x:Double x:Key="Width">673.6</x:Double>
+            <av:PointCollection x:Key="ConnectorLocation">100,77.6 100,103.6</av:PointCollection>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="SendEnvelope_1" sap:VirtualizedContainerService.HintSize="313.6,22.4" />
+      <sap2010:ViewStateData Id="BuildDataTable_1" sap:VirtualizedContainerService.HintSize="313.6,59.2" />
+      <sap2010:ViewStateData Id="AddDataRow_1" sap:VirtualizedContainerService.HintSize="313.6,22.4" />
+      <sap2010:ViewStateData Id="AppendCsvFile_1" sap:VirtualizedContainerService.HintSize="313.6,88" />
+      <sap2010:ViewStateData Id="Sequence_22" sap:VirtualizedContainerService.HintSize="336,1534.4">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ForEachRow_1" sap:VirtualizedContainerService.HintSize="366.4,1683.2" />
+      <sap2010:ViewStateData Id="Sequence_2" sap:VirtualizedContainerService.HintSize="388.8,1907.2">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="DocusignApplicationScope_1" sap:VirtualizedContainerService.HintSize="416,2446.4" />
+      <sap2010:ViewStateData Id="Sequence_4" sap:VirtualizedContainerService.HintSize="438.4,2696">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Main_1" sap:VirtualizedContainerService.HintSize="478.4,2856" />
+    </sap2010:ViewStateManager>
+  </sap2010:WorkflowViewState.ViewStateManager>
+</Activity>

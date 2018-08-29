@@ -79,7 +79,7 @@ namespace Docusign.Tabs.GUI
             {
                 string radioLabel = radioLabels[i];
                 var trimmed_item = radioLabel.Trim();
-                TextTab textTab = new TextTab(anchorText, offsetX + 20, (offsetY + spacing * i) - 5, documentId, pageNumber, toolTip, tabLabel, bold, italic, underline, font, fontColor, fontSize, 0, trimmed_item, 0, Shared);
+                TextTab textTab = new TextDisplayTab(anchorText, offsetX + 20, (offsetY + spacing * i) - 5, documentId, pageNumber, toolTip, tabLabel, bold, italic, underline, font, fontColor, fontSize, 0, trimmed_item, 0, Shared);
                 AddTabToRecipient(textTab);
             }
         }
