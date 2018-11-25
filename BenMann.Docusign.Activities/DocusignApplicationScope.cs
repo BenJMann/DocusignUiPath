@@ -17,6 +17,7 @@ namespace Docusign {
         [Description("API endpoint for DocuSign")]
         [DisplayName("DocuSign API Url")]
         public InArgument<string> RestApiUrl { get; set; }
+
         [RequiredArgument]
         [Category("Authentication")]
         [DisplayName("Client ID")]

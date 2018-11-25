@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 
@@ -65,6 +66,30 @@ namespace Docusign.DocusignTypes
         public string statusChangedDateTime;
     }
 
+    public class EnvelopeInfoList : IEnumerable<EnvelopeInfo>
+    {
+        List<EnvelopeInfo> envelopes = new List<EnvelopeInfo>();
+        public EnvelopeInfo this[int index] {
+            get { return envelopes[index]; }
+            set { envelopes.Insert(index, value); }
+        }
+
+        public void Add(EnvelopeInfo envelopeInfo)
+        {
+            envelopes.Add(envelopeInfo);
+        }
+
+        public IEnumerator<EnvelopeInfo> GetEnumerator()
+        {
+            return envelopes.GetEnumerator();
+        }
+
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return this.GetEnumerator();
+        }
+    }
 
 
 }

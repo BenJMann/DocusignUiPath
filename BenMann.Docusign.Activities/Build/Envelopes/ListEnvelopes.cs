@@ -5,6 +5,7 @@ using System.ComponentModel;
 using BenMann.Docusign;
 using Docusign.DocusignTypes;
 using System.Collections.Generic;
+using Microsoft.VisualBasic.Activities;
 
 namespace Docusign.Envelopes
 {
@@ -37,7 +38,7 @@ namespace Docusign.Envelopes
         [Category("Output")]
         [DisplayName("Envelope List")]
         [Description("List of Envelopes returned")]
-        public OutArgument<List<EnvelopeInfo>> EnvelopeList { get; set; }
+        public OutArgument<EnvelopeInfoList> EnvelopeList { get; set; }
 
 
         protected override IAsyncResult BeginExecute(AsyncCodeActivityContext context, AsyncCallback callback, object state)
@@ -52,6 +53,7 @@ namespace Docusign.Envelopes
                 Query["from_to_status"] = FromToStatus.ToString();
             if (Status.Get(context) != null)
                 Query["status"] = Status.Get(context).Replace(" ", "");
+
 
             GetEnvelopesDelegate = new Action(_ListEnvelopes);
             return GetEnvelopesDelegate.BeginInvoke(callback, state);
@@ -71,7 +73,10 @@ namespace Docusign.Envelopes
         protected override void EndExecute(AsyncCodeActivityContext context, IAsyncResult result)
         {
             GetEnvelopesDelegate.EndInvoke(result);
-            EnvelopeList.Set(context, resObj.envelopes);
+            EnvelopeInfoList envelopeInfoList = new EnvelopeInfoList();
+            foreach (EnvelopeInfo envInf in resObj.envelopes)
+                envelopeInfoList.Add(envInf);
+            EnvelopeList.Set(context, envelopeInfoList);
         }
     }
 }
