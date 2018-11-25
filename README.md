@@ -14,6 +14,12 @@ You will also need to generate a DocuSign Integrator key, and take note of:
 * Client Secret
 * Redirect URL - This should be input to http://localhost:5000 (or something similar if you know what you're doing)
 
+## Advanced Training Video
+
+I've created an advanced training video for the DocuSign Activity Pack. It goes through all the features including formatting, different roles, special tabs such as formulas, radio buttons, and different signing methods.
+
+https://www.youtube.com/watch?v=S70Zfqfzk_0&t=588s
+
 ### Setting up the Activity
 
 To start using the DocuSign Activities, you'll need to drag a new DocuSign Application Scope into UiPath. You'll need to set the following values:
